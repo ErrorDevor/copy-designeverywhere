@@ -1,0 +1,16 @@
+html {
+  font-size: 62.5%;
+
+  @media screen and (min-width: 2000px) {
+    font-size: 0.48vw;
+  }
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  color: #0d0d0d;
+  min-height: 100vh;
+  font-size: 1.6rem;
+}

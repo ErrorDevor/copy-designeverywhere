@@ -1,0 +1,3 @@
+@use "shared/styles/mixins" as *;
+
+@include optimizedFontFace("ABC Monument Grotesk Mono", 400, "/fonts/ABC-Diatype/ABCMonumentGroteskMono");
