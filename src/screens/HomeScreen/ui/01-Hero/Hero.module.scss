@@ -17,6 +17,13 @@
    cursor: pointer;
 }
 
+.thumbnail_media {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+}
+
 .right_side {
    display: flex;
    flex-direction: column;
