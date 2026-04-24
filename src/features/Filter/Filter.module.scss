@@ -1,0 +1,25 @@
+.filter {
+   background-color: #fff;
+   display: flex;
+   flex-direction: column;
+   position: relative;
+   z-index: 1;
+   height: 100%;
+    margin: 0 auto;
+    padding: 0 1.8518518519vw;
+    width: 100vw;
+
+   &_inner {
+      align-items: center;
+      cursor: pointer;
+      display: flex;
+      gap: 0.8rem;
+      padding-bottom: 2rem;
+      padding-top: 2rem;
+      transition: opacity 0.2s ease-in-out;
+
+      svg {
+        width: 1.2rem;
+      }
+   }
+}

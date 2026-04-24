@@ -1,0 +1,55 @@
+.button {
+   position: relative;
+   padding: 8px 10px;
+   border-radius: 2rem;
+   @include flexCenter();
+   min-height: 2.8rem;
+
+   white-space: nowrap;
+   overflow: hidden;
+   width: fit-content;
+   min-width: 6.3rem;
+   @include fontABCDiatype(1.2rem, 1, -0.015em, 400);
+   transition:
+      color 0.25s ease,
+      background 0.25s ease;
+
+   &_content {
+      position: relative;
+      z-index: 3;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+   }
+
+   &--light {
+      color: getColorBlack(1);
+      background: #f7f7f7;
+
+      &:hover {
+         background: getColorBlack(1);
+         color: getColorWhite();
+
+         svg {
+            fill: #f7f7f7;
+            // stroke: #f7f7f7;
+         }
+      }
+   }
+
+   &--black {
+      background: getColorBlack(1);
+      color: getColorWhite();
+
+      &:hover {
+         color: getColorBlack(1);
+         background: #f7f7f7;
+
+         // svg {
+         //    fill: #f7f7f7;
+         //    stroke: #f7f7f7;
+         // }
+      }
+   }
+}

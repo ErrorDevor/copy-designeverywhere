@@ -1,0 +1,227 @@
+.library {
+   display: flex;
+   gap: 1.8518518519vw;
+   flex-wrap: wrap;
+   margin-top: 16px;
+   height: 100%;
+   margin: 0 auto;
+   padding: 0 1.8518518519vw;
+   position: relative;
+   width: 100vw;
+   overflow: hidden;
+}
+
+.thumbnail {
+   cursor: pointer;
+   position: relative;
+   width: 22.6851851852vw;
+
+   &_image {
+      display: flex;
+      position: relative;
+      width: 100%;
+   }
+
+   &_video {
+      display: flex;
+      position: relative;
+      width: 100%;
+   }
+
+   &_title {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 2rem;
+   }
+
+   &_number {
+      width: 6.3271604938vw;
+      display: flex;
+      align-items: center;
+
+      p {
+         @include fontGroteskMono(1.4rem, 0, -0.015em, 400);
+      }
+   }
+
+   &_title_wrap {
+      word-wrap: break-word;
+      width: calc(100% - 1.85185vw);
+
+      h4 {
+         margin-bottom: 4px;
+         margin-top: 0.12em;
+         color: #0d0d0d;
+         font-weight: 500;
+         transition:
+            color 0.2s ease-in-out,
+            opacity 0.2s ease-in-out;
+
+         &:hover {
+            opacity: 0.8;
+         }
+      }
+
+      h5 {
+         color: #5b5b5b;
+         margin-top: 0.4rem;
+         transition: opacity 0.2s ease-in-out;
+
+         &:hover {
+            opacity: 0.8;
+         }
+      }
+   }
+
+   &_tags {
+      padding-top: 2rem;
+
+      &_item {
+         align-items: center;
+         display: flex;
+         height: 24px;
+         justify-content: center;
+
+         background-color: #ececec;
+         border-radius: 3px;
+         color: #5b5b5b;
+         display: flex;
+         justify-content: center;
+         padding: 0 8px;
+         transition:
+            color 0.2s ease-in-out,
+            background-color 0.2s ease-in-out;
+
+         &:hover {
+            background-color: #5b5b5b;
+            color: #ececec;
+         }
+      }
+   }
+
+   &_tags_wrapper {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 12px;
+      gap: 6px 6px;
+      letter-spacing: -0.015em;
+      line-height: 1;
+      margin-top: 22px;
+      width: 22.6851851852vw;
+   }
+}
+
+.thumbnail_grid {
+   margin-bottom: 9vw;
+}
+
+.square_unicode {
+   margin-left: -0.1em;
+   margin-right: 0.15em;
+   position: relative;
+   top: -0.1rem;
+}
+
+.location_button {
+   svg {
+      fill: #5b5b5b;
+      margin-right: 4px;
+      transition: fill 0.2s ease-in-out;
+      width: 8px;
+   }
+}
+
+.more_button {
+   min-width: fit-content !important;
+   color: #5b5b5b;
+}
+
+.pagination {
+   position: relative;
+   display: flex;
+   justify-content: flex-end;
+   width: 100%;
+   height: 100%;
+   margin: 0 auto;
+   padding: 0 1.8518518519vw;
+   padding-bottom: 5rem;
+
+   &_pages {
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      left: 50%;
+      position: absolute;
+      top: calc(50% - 20px);
+      transform: translate(-50%, -50%);
+   }
+
+   &_pages_inner {
+      align-items: center;
+      border: 1px solid #dedede;
+      border-radius: 40px;
+      display: flex;
+      padding: 8px 10px 6px;
+   }
+
+   &_pages_inner_circle {
+      @include flexCenter();
+      border-radius: 4rem;
+      height: 3.2rem;
+      width: 3.2rem;
+      color: #8e8e8e;
+      cursor: pointer;
+      @include fontABCDiatype(1.8rem, 1, -0.015em, 400, #8e8e8e);
+   }
+}
+
+.active {
+   background-color: #0d0d0d;
+   transition: color 0.3s ease;
+
+   &:hover {
+      color: #ececec;
+   }
+}
+
+.dots {
+   align-items: center;
+   display: flex;
+   height: 32px;
+   justify-content: center;
+   width: 32px;
+   @include fontABCDiatype(1.8rem, 1, -0.015em, 400, #8e8e8e);
+}
+
+.next_button {
+   text-transform: capitalize;
+   @include fontABCDiatype(9.6rem, 1, -0.03em, 400);
+   transition: opacity 0.2s ease;
+
+   &:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+   }
+
+   &:hover {
+      opacity: 0.5;
+   }
+}
+
+.prev_button {
+   position: absolute;
+   left: 0;
+   transition: opacity 0.2s ease;
+   text-transform: capitalize;
+   @include fontABCDiatype(9.6rem, 1, -0.03em, 400);
+
+   &:disabled {
+      opacity: 0.3;
+      pointer-events: none;
+   }
+
+   &:hover {
+      opacity: 0.5;
+   }
+}
