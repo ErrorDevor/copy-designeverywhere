@@ -1,0 +1,129 @@
+.thumbnail {
+   cursor: pointer;
+   position: relative;
+   width: 22.6851851852vw;
+
+   &_image {
+      display: flex;
+      position: relative;
+      width: 100%;
+   }
+
+   &_picture {
+    width: 100%;
+   }
+
+   &_video {
+      display: flex;
+      position: relative;
+      width: 100%;
+   }
+
+   &_title {
+      display: flex;
+      align-items: flex-start;
+      padding-top: 2rem;
+   }
+
+   &_number {
+      width: 6.3271604938vw;
+      display: flex;
+      align-items: center;
+
+      p {
+         @include fontGroteskMono(1.4rem, 0, -0.015em, 400);
+      }
+   }
+
+   &_title_wrap {
+      word-wrap: break-word;
+      width: calc(100% - 1.85185vw);
+
+      h4 {
+         margin-bottom: 4px;
+         margin-top: 0.12em;
+         color: #0d0d0d;
+         font-weight: 500;
+         transition:
+            color 0.2s ease-in-out,
+            opacity 0.2s ease-in-out;
+
+         &:hover {
+            opacity: 0.8;
+         }
+      }
+
+      h5 {
+         color: #5b5b5b;
+         margin-top: 0.4rem;
+         transition: opacity 0.2s ease-in-out;
+
+         &:hover {
+            opacity: 0.8;
+         }
+      }
+   }
+
+   &_tags {
+      padding-top: 2rem;
+
+      &_item {
+         align-items: center;
+         display: flex;
+         height: 24px;
+         justify-content: center;
+
+         background-color: #ececec;
+         border-radius: 3px;
+         color: #5b5b5b;
+         display: flex;
+         justify-content: center;
+         padding: 0 8px;
+         transition:
+            color 0.2s ease-in-out,
+            background-color 0.2s ease-in-out;
+
+         &:hover {
+            background-color: #5b5b5b;
+            color: #ececec;
+         }
+      }
+   }
+
+   &_tags_wrapper {
+      align-items: center;
+      display: flex;
+      flex-wrap: wrap;
+      font-size: 12px;
+      gap: 6px 6px;
+      letter-spacing: -0.015em;
+      line-height: 1;
+      margin-top: 22px;
+      width: 22.6851851852vw;
+   }
+}
+
+.thumbnail_grid {
+   margin-bottom: 9vw;
+}
+
+.square_unicode {
+   margin-left: -0.1em;
+   margin-right: 0.15em;
+   position: relative;
+   top: -0.1rem;
+}
+
+.location_button {
+   svg {
+      fill: #5b5b5b;
+      margin-right: 4px;
+      transition: fill 0.2s ease-in-out;
+      width: 8px;
+   }
+}
+
+.more_button {
+   min-width: fit-content !important;
+   color: #5b5b5b;
+}
