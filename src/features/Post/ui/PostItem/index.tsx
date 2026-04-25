@@ -78,13 +78,12 @@ export const PostItem: React.FC<Props> = (props) => {
                ))}
 
                {!showAllTags && data.tags.length > 4 && (
-                  <Button
-                     variant="light"
+                  <button
                      className={css.more_button}
                      onClick={() => setShowAllTags(true)}
                   >
                      ...
-                  </Button>
+                  </button>
                )}
             </ul>
          </div>
