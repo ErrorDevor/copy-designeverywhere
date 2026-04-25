@@ -34,7 +34,7 @@
    padding-top: 32px;
 
    h3 {
-      width: 38rem;
+      width: 22.6851851852vw;
    }
 }
 
@@ -47,7 +47,7 @@
 
    a {
       white-space: nowrap;
-      @include fontABCDiatype(1.6rem, 1.2, -0.015em, 400);
+      @include fontABCDiatype(0.9259259259vw, 1.2, -0.015em, 400);
       transition: opacity 0.2s ease;
 
       &:hover {
@@ -88,4 +88,39 @@
    position: relative;
    top: -0.1rem;
    color: #fff;
+}
+
+@media (max-width: 1080px) {
+}
+
+@media (max-width: 580px) {
+   .hero_section {
+      flex-direction: column;
+   }
+
+   .left_side {
+      width: 100%;
+   }
+
+   .library_instagram {
+      display: none;
+   }
+
+   .right_side {
+      width: 100%;
+      padding-left: 5.1282051282vw;
+      padding-right: 5.1282051282vw;
+
+      h1 {
+         margin-left: 0;
+         margin-bottom: 13px;
+         margin-top: 43px;
+      }
+   }
+
+   .library_header_inner_top {
+      h3 {
+         width: 49.7435897436vw;
+      }
+   }
 }

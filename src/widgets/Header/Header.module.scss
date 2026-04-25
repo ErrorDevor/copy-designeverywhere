@@ -68,3 +68,40 @@
       }
    }
 }
+
+.burger_button {
+   display: none;
+}
+
+@media (max-width: 580px) {
+   .header {
+      padding: 0 5.1282051282vw;
+   }
+
+   .header_inner,
+   .header_left_inner {
+      display: none;
+   }
+
+   .header_left {
+      width: 100%;
+   }
+
+   .search_button {
+      margin-left: auto;
+   }
+
+   .burger_button {
+      display: flex;
+      @include flexCenter();
+      background-color: #fff;
+      border: 1px solid #0d0d0d;
+      border-radius: 50%;
+      @include fontABCDiatype(1.4rem, 1, -0.015em, 400);
+      height: 24px;
+      transition:
+         background-color 0.2s ease-in-out,
+         color 0.2s ease-in-out;
+      width: 24px;
+   }
+}

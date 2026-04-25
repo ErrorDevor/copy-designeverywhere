@@ -21,12 +21,10 @@ export const Hero: React.FC<Prop> = ({ clasName }) => {
                <Image.Default src="/images/1741014067-designeverywhere_library_inthepark_1.avif" />
 
                <div className={css.library_header_thumbnail_title}>
-                  
-                     <div className={css.number}>
-                        <span className={css.square_unicode}>■</span>
-                        <p>WK-148</p>
-                     </div>
-                  
+                  <div className={css.number}>
+                     <span className={css.square_unicode}>■</span>
+                     <p>WK-148</p>
+                  </div>
 
                   <div>
                      <a href="/work/in-the-park">
