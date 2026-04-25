@@ -86,3 +86,33 @@
       }
    }
 }
+
+@media (max-width: 768px) {
+   .trending {
+      flex-direction: column;
+      padding: 0 1.85185vw;
+
+      &_works {
+         overflow-x: auto;
+      }
+   }
+
+   .related_thumbnail {
+      flex-shrink: 0;
+      gap: 2.5641025641vw;
+      width: 22rem;
+   }
+}
+
+@media (max-width: 580px) {
+   .related_thumbnai {
+      gap: 4.1025641026vw;
+      width: 22rem;
+   }
+
+   .title_wrap {
+      a {
+         font-size: 1.2rem;
+      }
+   }
+}

@@ -56,65 +56,67 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
 
    return (
       <section className={clsx(css.library, clasName)}>
-         {currentItems.map((item, index) => (
-            <article className={clsx(css.thumbnail, css.thumbnail_grid)} key={index}>
-               <NextLink className={css.thumbnail_image} href={item.src}>
-                  {item.type !== "image" ? (
-                     <video
-                        src={item.src}
-                        className={css.thumbnail_video}
-                        loop
-                        autoPlay
-                        playsInline
-                        muted
-                        preload="metadata"
-                     />
-                  ) : (
-                     <Image.Default src={item.src} />
-                  )}
+         <div className={css.library_grid}>
+            {currentItems.map((item, index) => (
+               <article className={clsx(css.thumbnail, css.thumbnail_grid)} key={index}>
+                  <NextLink className={css.thumbnail_image} href={item.src}>
+                     {item.type !== "image" ? (
+                        <video
+                           src={item.src}
+                           className={css.thumbnail_video}
+                           loop
+                           autoPlay
+                           playsInline
+                           muted
+                           preload="metadata"
+                        />
+                     ) : (
+                        <Image.Default src={item.src} />
+                     )}
 
-                  <LinkButton href={item.src} />
-               </NextLink>
-
-               <div className={css.thumbnail_title}>
-                  <NextLink href={item.href} className={css.thumbnail_number}>
-                     <span className={css.square_unicode}>■</span>
-                     <p>WK-{160 + startIndex + index}</p>
+                     <LinkButton href={item.src} />
                   </NextLink>
 
-                  <div className={css.thumbnail_title_wrap}>
-                     <NextLink href={item.href}>
-                        <H4>{item.title}</H4>
+                  <div className={css.thumbnail_title}>
+                     <NextLink href={item.href} className={css.thumbnail_number}>
+                        <span className={css.square_unicode}>■</span>
+                        <p>WK-{160 + startIndex + index}</p>
                      </NextLink>
 
-                     <NextLink href={item.profileHref}>
-                        <H5>{item.profile}</H5>
-                     </NextLink>
+                     <div className={css.thumbnail_title_wrap}>
+                        <NextLink href={item.href}>
+                           <H4>{item.title}</H4>
+                        </NextLink>
+
+                        <NextLink href={item.profileHref}>
+                           <H5>{item.profile}</H5>
+                        </NextLink>
+                     </div>
                   </div>
-               </div>
 
-               <div className={css.thumbnail_tags}>
-                  <ul className={css.thumbnail_tags_wrapper}>
-                     <Button variant="light" className={css.location_button}>
-                        <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 10">
-                           <path d="M4 0C1.79 0 0 1.746 0 3.9c0 2.406 2.333 4.855 3.435 5.88a.834.834 0 0 0 1.13 0C5.668 8.755 8 6.306 8 3.9 8.002 1.747 6.21 0 4 0Zm0 5.493c-.857 0-1.555-.68-1.555-1.517 0-.837.698-1.517 1.556-1.517.858 0 1.555.68 1.555 1.517 0 .837-.697 1.517-1.555 1.517Z"></path>
-                        </svg>
-                        {item.location}
-                     </Button>
+                  <div className={css.thumbnail_tags}>
+                     <ul className={css.thumbnail_tags_wrapper}>
+                        <Button variant="light" className={css.location_button}>
+                           <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 10">
+                              <path d="M4 0C1.79 0 0 1.746 0 3.9c0 2.406 2.333 4.855 3.435 5.88a.834.834 0 0 0 1.13 0C5.668 8.755 8 6.306 8 3.9 8.002 1.747 6.21 0 4 0Zm0 5.493c-.857 0-1.555-.68-1.555-1.517 0-.837.698-1.517 1.556-1.517.858 0 1.555.68 1.555 1.517 0 .837-.697 1.517-1.555 1.517Z"></path>
+                           </svg>
+                           {item.location}
+                        </Button>
 
-                     {item.tags.map((tag, id) => (
-                        <li key={id} className={css.thumbnail_tags_item}>
-                           <P>{tag.name}</P>
-                        </li>
-                     ))}
+                        {item.tags.map((tag, id) => (
+                           <li key={id} className={css.thumbnail_tags_item}>
+                              <P>{tag.name}</P>
+                           </li>
+                        ))}
 
-                     <Button variant="light" className={css.more_button}>
-                        ...
-                     </Button>
-                  </ul>
-               </div>
-            </article>
-         ))}
+                        <Button variant="light" className={css.more_button}>
+                           ...
+                        </Button>
+                     </ul>
+                  </div>
+               </article>
+            ))}
+         </div>
 
          <div className={css.pagination}>
             {currentPage > 1 && (
