@@ -7,6 +7,7 @@ import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import qs from "qs";
 
+import { Filter } from "features/Filter";
 import { PostItem } from "features/Post";
 import { usePosts } from "features/Post/model/usePosts";
 
@@ -22,6 +23,7 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
    const searchParams = useSearchParams();
    const [filter, setFilter] = React.useState({
       page: Number(searchParams.get("page") || 1),
+      aiTools: searchParams.get("aiTools")?.split(",") || [],
    });
 
    const postData = usePosts(filter);
@@ -77,59 +79,65 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
    React.useEffect(() => {
       const queryString = qs.stringify({
          page: filter.page > 1 ? filter.page : undefined,
+         aiTools: filter.aiTools.length > 0 ? filter.aiTools.join(",") : undefined,
       });
 
-      window.history.replaceState({}, "", queryString ? `/?${queryString}` : "/");
+      // window.history.replaceState({}, "", queryString ? `/?${queryString}` : "/");
    }, [filter]);
 
    return (
-      <section className={clsx(css.library, clasName)} ref={libRef}>
-         {(postData.data?.docs || []).map((post) => (
-            <PostItem data={post} key={post.id} />
-         ))}
-
-         <div className={css.pagination}>
-            {filter.page > 1 && (
-               <button className={css.prev_button} type="button" onClick={handlePrev}>
-                  prev
-               </button>
-            )}
-            <div className={css.pagination_pages}>
-               <div className={css.pagination_pages_inner}>
-                  {getPagination().map((item, index) => {
-                     if (item === "...") {
-                        return (
-                           <span key={`dots-${index}`} className={css.dots}>
-                              ...
-                           </span>
-                        );
-                     }
-
-                     return (
-                        <button
-                           key={item}
-                           type="button"
-                           className={clsx(
-                              css.pagination_pages_inner_circle,
-                              filter.page === item && css.active
-                           )}
-                           onClick={() => goToPage(item as number)}
-                        >
-                           {item}
-                        </button>
-                     );
-                  })}
-               </div>
+      <section className={css.library_section}>
+         <Filter filter={filter} onChange={setFilter} />
+         <div className={clsx(css.library, clasName)} ref={libRef}>
+            <div className={css.library_list}>
+               {(postData.data?.docs || []).map((post) => (
+                  <PostItem data={post} key={post.id} />
+               ))}
             </div>
 
-            <button
-               className={css.next_button}
-               type="button"
-               onClick={handleNext}
-               disabled={filter.page >= totalPages}
-            >
-               next
-            </button>
+            <div className={css.pagination}>
+               {filter.page > 1 && (
+                  <button className={css.prev_button} type="button" onClick={handlePrev}>
+                     prev
+                  </button>
+               )}
+               <div className={css.pagination_pages}>
+                  <div className={css.pagination_pages_inner}>
+                     {getPagination().map((item, index) => {
+                        if (item === "...") {
+                           return (
+                              <span key={`dots-${index}`} className={css.dots}>
+                                 ...
+                              </span>
+                           );
+                        }
+
+                        return (
+                           <button
+                              key={item}
+                              type="button"
+                              className={clsx(
+                                 css.pagination_pages_inner_circle,
+                                 filter.page === item && css.active
+                              )}
+                              onClick={() => goToPage(item as number)}
+                           >
+                              {item}
+                           </button>
+                        );
+                     })}
+                  </div>
+               </div>
+
+               <button
+                  className={css.next_button}
+                  type="button"
+                  onClick={handleNext}
+                  disabled={filter.page >= totalPages}
+               >
+                  next
+               </button>
+            </div>
          </div>
       </section>
    );

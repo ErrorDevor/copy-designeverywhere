@@ -18,6 +18,7 @@ interface Props {
 
 export const PostItem: React.FC<Props> = (props) => {
    const { data } = props;
+   const [showAllTags, setShowAllTags] = React.useState(false);
 
    const contentType = React.useMemo(() => {
       return data.preview.mimeType.split("/")[0] as "image" | "video";
@@ -70,15 +71,21 @@ export const PostItem: React.FC<Props> = (props) => {
                   {item.location}
                </Button> */}
 
-               {data.tags.map((tag, id) => (
+               {data.tags.slice(0, showAllTags ? 999 : 4).map((tag) => (
                   <li key={tag.id} className={css.thumbnail_tags_item}>
                      <P>{tag.value}</P>
                   </li>
                ))}
 
-               <Button variant="light" className={css.more_button}>
-                  ...
-               </Button>
+               {!showAllTags && data.tags.length > 4 && (
+                  <Button
+                     variant="light"
+                     className={css.more_button}
+                     onClick={() => setShowAllTags(true)}
+                  >
+                     ...
+                  </Button>
+               )}
             </ul>
          </div>
       </article>

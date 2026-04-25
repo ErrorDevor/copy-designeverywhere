@@ -1,18 +1,23 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
+import qs from "qs";
 import { HomeScreens } from "screens/HomeScreen";
 
 import { getQueryClient } from "app/providers/ReactQueryProvider/getQueryClient";
 
-import { Filter } from "features/Filter";
-import { HOME_KEY } from "features/Home";
 import { GET_POSTS_KEY, getPostsFilter } from "features/Post/model/usePosts";
 
 import { fetchServerApi } from "shared/api/lib/fetchServerApi";
+import { PageWithSearchParams } from "shared/api/types";
 
 export const dynamic = "force-dynamic";
 
-export default async function Home() {
-   const queryPosts = getPostsFilter();
+export default async function Home({ searchParams }: PageWithSearchParams) {
+   const { page, aiTools } = await searchParams;
+
+   const queryPosts = getPostsFilter({
+      page: Number(page) || 1,
+      aiTools: aiTools?.toString().split(",") || [],
+   });
 
    const posts = await fetchServerApi("/posts", {
       noCache: true,
@@ -32,7 +37,7 @@ export default async function Home() {
    });
 
    queryClient.prefetchQuery({
-      queryKey: [GET_POSTS_KEY, queryPosts],
+      queryKey: [GET_POSTS_KEY, qs.stringify(queryPosts)],
       queryFn: () => posts,
       initialData: posts,
    });
@@ -42,7 +47,6 @@ export default async function Home() {
          <HydrationBoundary state={dehydrate(queryClient)}>
             <HomeScreens.Hero />
             <HomeScreens.Trending />
-            <Filter />
             <HomeScreens.Library />
          </HydrationBoundary>
       );

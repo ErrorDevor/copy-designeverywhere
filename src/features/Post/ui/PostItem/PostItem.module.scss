@@ -1,7 +1,6 @@
 .thumbnail {
    cursor: pointer;
    position: relative;
-   width: 22.6851851852vw;
 
    &_image {
       display: flex;
@@ -10,13 +9,19 @@
    }
 
    &_picture {
-    width: 100%;
+      width: 100%;
+
+      img {
+         width: 100%;
+      }
    }
 
    &_video {
       display: flex;
       position: relative;
       width: 100%;
+      object-fit: cover;
+      object-position: center;
    }
 
    &_title {

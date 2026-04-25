@@ -5,10 +5,33 @@
    margin-top: 16px;
    height: 100%;
    margin: 0 auto;
-   padding: 0 1.8518518519vw;
    position: relative;
-   width: 100vw;
+   width: 100%;
    overflow: hidden;
+
+   &_section {
+      position: relative;
+      padding: 0 1.8518518519vw;
+   }
+
+   &_list {
+      width: 100%;
+      max-width: 100%;
+      display: grid;
+      overflow: hidden;
+      gap: 1.8518518519vw;
+      grid-template-columns: repeat(4, 1fr);
+
+      @media screen and (max-width: 1120px) {
+         grid-template-columns: repeat(3, 1fr);
+      }
+      @media screen and (max-width: 768px) {
+         grid-template-columns: repeat(2, 1fr);
+      }
+      @media screen and (max-width: 565px) {
+         grid-template-columns: repeat(1, 1fr);
+      }
+   }
 }
 
 .pagination {
