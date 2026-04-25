@@ -132,3 +132,35 @@
    min-width: fit-content !important;
    color: #5b5b5b;
 }
+
+@media (max-width: 580px) {
+   .next_button,
+   .prev_button {
+      font-size: 3.6rem;
+   }
+
+   .thumbnail_title {
+      flex-direction: column;
+      gap: 1.2rem;
+   }
+
+   .thumbnail_tags {
+      display: none;
+   }
+
+   .pagination {
+      &_pages_inner_circle {
+         font-size: 1.2rem;
+      }
+
+      &_pages_inner {
+         padding: 2px 4px;
+      }
+   }
+
+   .dots {
+      height: 26px;
+      width: 26px;
+      font-size: 1.2rem;
+   }
+}

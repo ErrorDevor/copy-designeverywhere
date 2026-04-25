@@ -30,6 +30,7 @@ export const Header: React.FC = () => {
       </NextLink>
 
       <div className={css.header_left}>
+        <button className={css.burger_button}>i</button>
         <Button variant="light" className={css.search_button}>
           <svg
             width="16"

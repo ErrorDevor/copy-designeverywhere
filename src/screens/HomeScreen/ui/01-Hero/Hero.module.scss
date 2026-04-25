@@ -96,3 +96,38 @@
    top: -0.1rem;
    color: #fff;
 }
+
+@media (max-width: 1080px) {
+}
+
+@media (max-width: 580px) {
+   .hero_section {
+      flex-direction: column;
+   }
+
+   .left_side {
+      width: 100%;
+   }
+
+   .library_instagram {
+      display: none;
+   }
+
+   .right_side {
+      width: 100%;
+      padding-left: 5.1282051282vw;
+      padding-right: 5.1282051282vw;
+
+      h1 {
+         margin-left: 0;
+         margin-bottom: 13px;
+         margin-top: 43px;
+      }
+   }
+
+   .library_header_inner_top {
+      h3 {
+         width: 49.7435897436vw;
+      }
+   }
+}
