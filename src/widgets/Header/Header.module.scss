@@ -33,6 +33,11 @@
       top: 50%;
       transform: translate(-50%, calc(-50% + 1px));
       z-index: 20;
+
+      img {
+         max-width: 160px;
+         width: 100%;
+      }
    }
 
    &_left,

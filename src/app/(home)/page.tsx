@@ -45,7 +45,7 @@ export default async function Home({ searchParams }: PageWithSearchParams) {
    try {
       return (
          <HydrationBoundary state={dehydrate(queryClient)}>
-            <HomeScreens.Hero />
+            {/* <HomeScreens.Hero /> */}
             <HomeScreens.Trending />
             <HomeScreens.Library />
          </HydrationBoundary>

@@ -11,6 +11,7 @@ import { LinkButton } from "shared/ui/ui-kit/LinkButton";
 import { H4, H5, P } from "shared/ui/ui-kit/Text";
 
 import css from "./PostItem.module.scss";
+import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
 
 interface Props {
    data: Post;
@@ -26,7 +27,7 @@ export const PostItem: React.FC<Props> = (props) => {
 
    return (
       <article className={clsx(css.thumbnail, css.thumbnail_grid)}>
-         <NextLink className={css.thumbnail_image} href={`/posts/${data.slug}`}>
+         <div className={css.thumbnail_image}>
             {contentType === "image" && (
                <ImageApi className={css.thumbnail_picture} data={data.preview} />
             )}
@@ -42,8 +43,10 @@ export const PostItem: React.FC<Props> = (props) => {
                />
             )}
 
-            {/* <LinkButton href={item.src} /> */}
-         </NextLink>
+            <CopyPrompt prompt={data.prompt}>
+               Copy Prompt
+            </CopyPrompt>
+         </div>
 
          <div className={css.thumbnail_title}>
             <NextLink className={css.thumbnail_number}>

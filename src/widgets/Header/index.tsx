@@ -17,35 +17,17 @@ export const Header: React.FC = () => {
         </Button>
         <Button variant="light" className={css.menu_button}>
           <div className={css.circle} />
-          Index
-        </Button>
-        <Button variant="light" className={css.menu_button}>
-          <div className={css.circle} />
-          Categories
+          Backgrounds
         </Button>
       </nav>
 
       <NextLink className={css.header_logo} href="/">
-        <H4>DESIGN EVERYWHERE</H4>
+        <img src="/images/lafys.svg" />
       </NextLink>
 
       <div className={css.header_left}>
         <button className={css.burger_button}>i</button>
-        <Button variant="light" className={css.search_button}>
-          <svg
-            width="16"
-            height="16"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <circle cx="6.222" cy="6.222" r="5.722"></circle>
-            <path d="m10.135 10.313 5.333 5.333"></path>
-          </svg>
-        </Button>
         <div className={css.header_left_inner}>
-          <Button variant="light" className={css.login_button}>
-            Log In
-          </Button>
           <Button variant="black" className={css.join_button}>
             Join
           </Button>

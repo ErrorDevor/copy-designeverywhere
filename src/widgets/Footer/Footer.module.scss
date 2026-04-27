@@ -88,7 +88,8 @@
 
 .footer_links_wrap {
    display: flex;
-   justify-content: space-between;
+   gap: 40px;
+   // justify-content: space-between;
    width: 79.9382716049vw;
    @include fontABCDiatype(1.2rem, 1, -0.015em, 400, #fff);
 

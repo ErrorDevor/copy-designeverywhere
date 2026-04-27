@@ -28,11 +28,11 @@ const monumentMono = localFont({
 });
 
 export const metadata: Metadata = {
-   title: "Copy designeverywhere",
-   description: "Copy designeverywhere",
+   title: "Lafys",
+   description: "",
    icons: {
-      icon: "/favicon.ico",
-      apple: "/favicon.ico",
+      icon: "/favicon.svg",
+      apple: "/favicon.svg",
    },
 };
 

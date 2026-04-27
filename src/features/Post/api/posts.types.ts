@@ -11,6 +11,7 @@ export interface Post {
       value: string;
    }>;
    plan: "premium" | "free";
+   prompt?: string;
    category?: Category;
    aiTool?: AiTool;
 }

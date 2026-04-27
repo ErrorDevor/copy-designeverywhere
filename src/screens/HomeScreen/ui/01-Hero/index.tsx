@@ -61,7 +61,7 @@ export const Hero: React.FC<Prop> = ({ clasName }) => {
             <div className={css.library_header_inner_top}>
                <H3>{home.main.slogan}</H3>
                <div className={css.library_instagram}>
-                  <a target="_blank" href="https://www.instagram.com/designeverywhere_">
+                  <a target="_blank">
                      <span>Discover more on our Instagram ↗</span>
                   </a>
                </div>
