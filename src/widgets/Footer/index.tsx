@@ -76,7 +76,7 @@ export const Footer: React.FC = () => {
                   <a href="/terms-of-use">
                      <P>Terms of Use</P>
                   </a>
-                  <a href="/privacy-policy">
+                  <a href="/privacy">
                      <P>Privacy Policy</P>
                   </a>
                </div>
