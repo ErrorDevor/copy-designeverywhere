@@ -73,6 +73,22 @@
          opacity: 0.5;
       }
    }
+
+   &.subscribed {
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+
+      h4 {
+         font-size: 30px;
+         font-weight: 700;
+      }
+
+      p {
+         font-size: 16px;
+         color: rgba(#000, 0.5);
+      }
+   }
 }
 
 .newsletter_bottom {

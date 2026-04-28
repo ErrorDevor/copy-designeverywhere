@@ -12,11 +12,13 @@ export const Header: React.FC = () => {
     <header className={css.header}>
       <nav className={css.header_inner}>
         <Button variant="light" className={css.menu_button}>
-          <div className={css.circle} />
+          {/* <div className={css.circle} /> */}
+          <span>→&nbsp;</span>
           Library
         </Button>
         <Button variant="light" className={css.menu_button}>
-          <div className={css.circle} />
+          {/* <div className={css.circle} /> */}
+          <span>→&nbsp;</span>
           Backgrounds
         </Button>
       </nav>
@@ -29,7 +31,7 @@ export const Header: React.FC = () => {
         <button className={css.burger_button}>i</button>
         <div className={css.header_left_inner}>
           <Button variant="black" className={css.join_button}>
-            Join
+            Join Club
           </Button>
         </div>
       </div>

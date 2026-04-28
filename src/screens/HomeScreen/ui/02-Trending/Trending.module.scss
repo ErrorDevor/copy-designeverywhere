@@ -62,7 +62,7 @@
 .number {
    align-items: center;
    display: flex;
-   @include fontGroteskMono(1.4rem, 0, -0.015em, 400);
+   @include fontGroteskMono(1.4rem, 1, -0.015em, 400, rgba(#000, 0.5));
 }
 
 .square_unicode {

@@ -8,9 +8,15 @@ import { Button } from "shared/ui/ui-kit/Button";
 import { H2, H4, P } from "shared/ui/ui-kit/Text";
 
 import css from "./Footer.module.scss";
+import { fetchClientApi } from "shared/api/lib/fetchClientApi";
+import axios from "axios";
+import { getApiUrl } from "shared/api/lib/getApiUrl";
 
 export const Footer: React.FC = () => {
    const now = new Date();
+   const [email, setEmail] = React.useState("");
+   const [isSent, setSent] = React.useState(false);
+   const [isSending, setIsSending] = React.useState(false);
 
    const formatted = now.toLocaleString("en-GB", {
       weekday: "long",
@@ -22,29 +28,76 @@ export const Footer: React.FC = () => {
       hour12: true,
    });
 
+   const isEmail = (email: string) => {
+      if (!email.includes("@")) {
+         return false;
+      }
+      const [left, right] = email.split("@");
+      if (left.trim() === "" || right.trim() === "") {
+         return false;
+      }
+      if(!right.includes('.') || right.endsWith('.')) {
+         return false;
+      }
+      return true;
+   };
+
+   const handleSubmit = async (e: React.SubmitEvent) => {
+      e.preventDefault();
+
+      try {
+         setIsSending(true);
+
+         await axios.post('/api/newsletter', { email });
+
+         setSent(true);
+      } catch (error) {
+         setIsSending(false);
+         setEmail("");
+      }
+   }
+
    return (
       <footer className={css.footer}>
          <div className={css.footer_top}>
             <div className={css.footer_newsletter}>
                <H2>Newsletter</H2>
 
-               <form className={css.newsletter}>
-                  <H4>Subscribe to our newsletter for occasional updates 🛸</H4>
-
-                  <input type="email" placeholder="Enter email" className={css.newsletter_input} />
-
-                  <div className={css.newsletter_bottom}>
-                     <P>
-                        By registering, you agree to the Terms of Use and acknowledge that you have
-                        read our Privacy Policy.
-                     </P>
-
-                     <Button variant="light" className={css.more_button}>
-                        Sign up
-                        <span>→</span>
-                     </Button>
+               {isSent ? (
+                  <div className={clsx(css.newsletter, css.subscribed)}>
+                     <H4>Thank you!</H4>
+                     <P>Your subscription has been confirmed.</P>
                   </div>
-               </form>
+               ) : (
+                  <form className={css.newsletter} onSubmit={handleSubmit}>
+                     <H4>Subscribe to get the newest top-tier prompts first</H4>
+
+                     <input
+                        type="email"
+                        placeholder="Enter email"
+                        className={css.newsletter_input}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                     />
+
+                     <div className={css.newsletter_bottom}>
+                        <P>
+                           By subscribing, you agree to the Terms of Use and acknowledge that you
+                           have read our Privacy Policy.
+                        </P>
+
+                        <Button
+                           variant="light"
+                           disabled={isSending || !isEmail(email)}
+                           className={css.more_button}
+                           type="submit"
+                        >
+                           Subscribe
+                           <span>→</span>
+                        </Button>
+                     </div>
+                  </form>
+               )}
             </div>
 
             <div className={clsx(css.footer_links, css.p4)}>

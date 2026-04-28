@@ -50,7 +50,7 @@ export const PostItem: React.FC<Props> = (props) => {
 
          <div className={css.thumbnail_title}>
             <NextLink className={css.thumbnail_number}>
-               <span className={css.square_unicode}>■</span>
+               {/* <span className={css.square_unicode}>■</span> */}
                <p>{data.aiTool?.name}</p>
             </NextLink>
 
