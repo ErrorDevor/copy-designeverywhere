@@ -11,12 +11,12 @@ export const Header: React.FC = () => {
   return (
     <header className={css.header}>
       <nav className={css.header_inner}>
-        <Button variant="light" className={css.menu_button}>
+        <Button variant="light" className={css.menu_button} href="/" as="a">
           {/* <div className={css.circle} /> */}
           <span>→&nbsp;</span>
           Library
         </Button>
-        <Button variant="light" className={css.menu_button}>
+        <Button variant="light" className={css.menu_button} href="/backgrounds" as="a">
           {/* <div className={css.circle} /> */}
           <span>→&nbsp;</span>
           Backgrounds

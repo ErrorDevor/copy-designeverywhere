@@ -1,9 +1,10 @@
 import { HydrationBoundary, dehydrate } from "@tanstack/react-query";
 import qs from "qs";
-import { HomeScreens } from "screens/HomeScreen";
+import { BackgroundsScreen } from "screens/BackgroundsScreen";
 
 import { getQueryClient } from "app/providers/ReactQueryProvider/getQueryClient";
 
+import { GET_BACKGROUND_POSTS_KEY } from "features/Post";
 import { GET_POSTS_KEY, getPostsFilter } from "features/Post/model/usePosts";
 
 import { fetchServerApi } from "shared/api/lib/fetchServerApi";
@@ -19,25 +20,25 @@ export default async function Home({ searchParams }: PageWithSearchParams) {
       aiTools: aiTools?.toString().split(",") || [],
    });
 
-   const posts = await fetchServerApi("/posts", {
+   const posts = await fetchServerApi("/background-posts", {
       noCache: true,
       query: queryPosts,
    });
 
-   const home = await fetchServerApi("/globals/page-home", {
+   const home = await fetchServerApi("/globals/page-backgrounds", {
       noCache: true,
    });
 
    const queryClient = getQueryClient();
 
    queryClient.prefetchQuery({
-      queryKey: ["get-home"],
+      queryKey: ["get-backgrounds-page"],
       queryFn: () => home,
       initialData: home,
    });
 
    queryClient.prefetchQuery({
-      queryKey: ["get-posts", qs.stringify(queryPosts)],
+      queryKey: ["get-background-posts", qs.stringify(queryPosts)],
       queryFn: () => posts,
       initialData: posts,
    });
@@ -46,8 +47,8 @@ export default async function Home({ searchParams }: PageWithSearchParams) {
       return (
          <HydrationBoundary state={dehydrate(queryClient)}>
             {/* <HomeScreens.Hero /> */}
-            <HomeScreens.Trending />
-            <HomeScreens.Library />
+            <BackgroundsScreen.Trending />
+            <BackgroundsScreen.Library />
          </HydrationBoundary>
       );
    } catch (error) {
