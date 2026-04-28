@@ -102,8 +102,8 @@ export const Footer: React.FC = () => {
 
             <div className={clsx(css.footer_links, css.p4)}>
                <div className={css.footer_links_wrap}>
-                  <a href="/about">About</a>
-                  <a href="/club">Join The Club</a>
+                  {/* <a href="/about">About</a> */}
+                  <a href="/pricing">Join The Club</a>
                </div>
 
                <div className={css.footer_social_links}>
