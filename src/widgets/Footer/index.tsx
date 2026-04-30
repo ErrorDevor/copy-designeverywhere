@@ -18,15 +18,15 @@ export const Footer: React.FC = () => {
    const [isSent, setSent] = React.useState(false);
    const [isSending, setIsSending] = React.useState(false);
 
-   const formatted = now.toLocaleString("en-GB", {
-      weekday: "long",
-      day: "2-digit",
-      month: "long",
-      year: "numeric",
-      hour: "numeric",
-      minute: "2-digit",
-      hour12: true,
-   });
+   // const formatted = now.toLocaleString("en-GB", {
+   //    weekday: "long",
+   //    day: "2-digit",
+   //    month: "long",
+   //    year: "numeric",
+   //    hour: "numeric",
+   //    minute: "2-digit",
+   //    hour12: true,
+   // });
 
    const isEmail = (email: string) => {
       if (!email.includes("@")) {
@@ -135,9 +135,9 @@ export const Footer: React.FC = () => {
                </div>
             </div>
 
-            <time className={clsx(css.footer_clock, css.subtitle2)}>
+            {/* <time className={clsx(css.footer_clock, css.subtitle2)}>
                <p>{formatted}</p>
-            </time>
+            </time> */}
          </div>
       </footer>
    );

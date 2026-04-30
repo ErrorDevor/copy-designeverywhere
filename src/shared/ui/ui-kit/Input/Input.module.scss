@@ -1,0 +1,40 @@
+.input {
+   &.error {
+      .input_container {
+         border-color: #ff1a1a;
+      }
+      .input_input {
+         &,
+         &::placeholder {
+            color: #ff1a1a;
+         }
+      }
+   }
+}
+.input_container {
+   border: 0.1rem solid #dedede;
+   border-radius: 1.5rem;
+   padding: 0.8rem 1.6rem 0.95rem;
+   display: flex;
+   flex-direction: column;
+}
+.input_field {
+   display: flex;
+   flex-direction: column;
+}
+.input_label {
+   @include fontGroteskMono(10px, 2, normal, 400, rgb(13, 13, 13));
+   text-transform: uppercase;
+}
+.input_input {
+   @include fontABCDiatype(14px, 1, -0.015em, 400, #000);
+
+   &::placeholder {
+      color: rgba(#000, 0.5);
+   }
+}
+.input_error {
+   margin-top: 0.4rem;
+   padding-left: 0.8rem;
+   @include fontGroteskMono(11px, 1.2, -0.04em, 400, #ff1a1a);
+}

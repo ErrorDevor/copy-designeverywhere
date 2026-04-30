@@ -13,7 +13,7 @@ export interface Post {
    plan: "premium" | "free";
    prompt?: string;
    category?: Category;
-   aiTool?: AiTool;
+   aiTool: AiTool[];
 }
 
 export interface PostList extends PayloadPagination {

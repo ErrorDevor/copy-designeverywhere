@@ -1,0 +1,60 @@
+.form {
+   display: flex;
+   flex-direction: column;
+   gap: 0.8rem;
+}
+.form_submitBtn {
+   width: 100%;
+   padding: 1.4rem 2rem;
+   font-size: 1.4rem;
+   border-radius: 10rem !important;
+}
+.form_notMember {
+   margin-bottom: 0.5rem;
+   margin-top: 4rem;
+   @include fontABCDiatype(1.4rem, 1.25, -0.015em, 400, rgb(13, 13, 13));
+   text-align: center;
+}
+.form_joinBtn {
+   align-items: center;
+   display: flex;
+   flex-grow: 1;
+   justify-content: center;
+   margin: 1.3rem 0;
+   border-radius: 15rem;
+   padding: 6rem;
+   border: 0.1rem solid #dedede;
+   transition:
+      color 0.2s ease-in-out,
+      background-color 0.2s ease-in-out;
+   @include fontABCDiatype(1.4rem, 1, -0.015em, 400, #8e8e8e);
+
+   &:hover {
+      background-color: #0d0d0d;
+      border-color: #fff;
+      color: #fff;
+   }
+}
+.form_terms {
+   max-width: 47.4rem;
+   width: 100%;
+   margin: 2.4rem auto 0;
+   text-align: center;
+
+   @include fontABCDiatype(12px, 1.25, -0.015em, 400, #8e8e8e);
+
+   a {
+      text-decoration: underline;
+   }
+}
+.error {
+   text-align: center;
+   margin-bottom: 2rem;
+   @include fontABCDiatype(14px, 1.25, -0.015em, 400, #ff2323);
+}
+
+@media screen and (max-width: 565px) {
+   .form_joinBtn {
+      padding: 4rem;
+   }
+}

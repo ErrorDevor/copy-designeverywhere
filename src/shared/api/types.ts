@@ -1,3 +1,5 @@
+export type SearchQuery = Record<string, any> | string | undefined;
+
 export interface PageWithSearchParams {
    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }

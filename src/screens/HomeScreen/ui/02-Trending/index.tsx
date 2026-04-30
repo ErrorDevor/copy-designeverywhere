@@ -47,7 +47,7 @@ export const Trending: React.FC<Prop> = ({ clasName }) => {
                   <div className={css.related_thumbnail_title}>
                      <div className={css.number}>
                         {/* <span className={css.square_unicode}>■</span> */}
-                        {item.aiTool?.name}
+                        {item.aiTool.map((item) => <span key={item.id}>{item.name}</span>)}
                      </div>
 
                      <div className={css.title_wrap}>

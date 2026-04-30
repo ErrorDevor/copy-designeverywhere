@@ -62,8 +62,10 @@
 }
 
 .number {
-   align-items: center;
+   align-items: flex-start;
    display: flex;
+   flex-direction: column;
+   gap: 0.4rem;
    @include fontGroteskMono(1.4rem, 1, -0.015em, 400, rgba(#000, 0.5));
 }
 

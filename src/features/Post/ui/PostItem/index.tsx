@@ -51,7 +51,7 @@ export const PostItem: React.FC<Props> = (props) => {
          <div className={css.thumbnail_title}>
             <NextLink className={css.thumbnail_number}>
                {/* <span className={css.square_unicode}>■</span> */}
-               <p>{data.aiTool?.name}</p>
+               <p>{data.aiTool.map(item => <span key={item.name}>{item.name}</span>)}</p>
             </NextLink>
 
             <div className={css.thumbnail_title_wrap}>

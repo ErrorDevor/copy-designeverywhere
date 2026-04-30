@@ -23,6 +23,7 @@ export const getPostsFilter = (filter: Partial<PostsFilter> = {}) => {
                ? { in: filter.aiTools.join(",") }
                : undefined,
       },
+      sort: '-priority,createdAt'
    };
 };
 
