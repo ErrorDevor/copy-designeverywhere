@@ -4,7 +4,7 @@
    margin: 0 auto;
    padding: 0 1.8518518519vw 5rem;
    position: relative;
-   width: 100vw;
+   width: 100%;
 }
 
 .intro {
@@ -48,11 +48,24 @@
    cursor: pointer;
    @include fontABCDiatype(1.8rem, 1, 0, 400);
 
+   span {
+      display: inline-block;
+      transform: translateY(-0.1em);
+      font-size: 1.2rem;
+      border-radius: 2rem;
+      border: 0.1rem solid rgba(#000, 0.5);
+      padding: 0.2rem 0.5rem;
+   }
+
    &.active {
       background: #000;
       color: #fff;
       border-radius: 40px;
       padding: 12px;
+
+      span {
+         border-color: #FFF;
+      }
    }
 }
 

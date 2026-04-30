@@ -23,14 +23,14 @@ const pricingData = {
          period: "Lifetime Access - One-time Payment",
          description: "Get started fast with unlimited access to all available components",
          image: "/images/basic.webp",
+         buttonName: "Get Basic Access",
          benefits: [
             { text: "Unlimited access", active: true },
-            { text: "30+ AI Ready Templates ", active: false },
+            { text: "30+ AI Ready Templates", active: false },
             { text: "Animated Backgrounds", active: false },
             { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "50% OFF on Design Rocket", active: true },
-            { text: "Commercial license", active: true, strong: true },
-            { text: "Priority support", active: true },
+            { text: "10% OFF on QClay Services", active: true },
+            { text: "Commercial license", active: true, strong: true }
          ],
       },
       {
@@ -39,72 +39,65 @@ const pricingData = {
          description:
             "The most valuable plan, get lifetime access on MotionSites with a one-time payment",
          image: "/images/grow.webp",
+         buttonName: "Get Grow Access",
          benefits: [
             { text: "Unlimited access", active: true },
             { text: "30+ AI Ready Templates", active: true },
             { text: "Animated Backgrounds", active: true },
             { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "50% OFF on Design Rocket", active: true },
+            { text: "10% OFF on QClay Services", active: true },
             { text: "Commercial license", active: true, strong: true },
             { text: "Priority support", active: true },
-         ],
-      },
-      {
-         price: "$999",
-         period: "Lifetime Access - One-time Payment",
-         description: "Build your own products or websites and resell unlimited time",
-         image: "/images/premium.webp",
-         benefits: [
-            { text: "Everything in Power", active: true, strong: true },
-            { text: "Build your own products or websites", active: true, strong: true },
-            { text: "Resell unlimited time", active: true, strong: true },
-            { text: "Commercial license", active: true },
-            { text: "Priority support", active: true },
+            { text: "Access to payouts for your prompts", active: true },
          ],
       },
    ],
 
    monthly: [
       {
-         price: "$35",
+         price: "$30",
          period: "Per month, cancel anytime",
          description: "Get started fast with unlimited access to all available components",
          image: "/images/basic.webp",
+         buttonName: "Subscribe Monthly",
          benefits: [
             { text: "Unlimited access", active: true },
-            { text: "30+ AI Ready Templates ", active: false },
+            { text: "30+ AI Ready Templates", active: false },
             { text: "Animated Backgrounds", active: false },
             { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "50% OFF on Design Rocket", active: true },
-            { text: "Commercial license", active: true, strong: true },
-            { text: "Priority support", active: true },
+            { text: "10% OFF on QClay Services", active: true },
+            { text: "Commercial license", active: true, strong: true }
          ],
       },
       {
-         price: "$69 $49",
+         price: "$80 $45",
          period: "Per month, cancel anytime",
          description:
-            "The most valuable plan, get full access on MotionSites with a monthly subscription",
+            "The best plan, get full access on Lafys with a monthly subscription",
          image: "/images/grow.webp",
+         buttonName: "Subscribe Monthly",
          benefits: [
             { text: "Unlimited access", active: true },
             { text: "30+ AI Ready Templates", active: true },
             { text: "Animated Backgrounds", active: true },
             { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "50% OFF on Design Rocket", active: true },
+            { text: "10% OFF on QClay Services", active: true },
             { text: "Commercial license", active: true, strong: true },
             { text: "Priority support", active: true },
+            { text: "Access to payouts for your prompts", active: true },
          ],
       },
       {
-         price: "$179",
+         price: "$100",
          period: "Per month, cancel anytime",
          description: "Build your own products or websites and resell unlimited time",
          image: "/images/premium.webp",
+         buttonName: "Subscribe Monthly",
          benefits: [
-            { text: "Everything in Power", active: true, strong: true },
-            { text: "Build your own products or websites", active: true, strong: true },
+            { text: "Everything in Grow", active: true, strong: true },
             { text: "Resell unlimited time", active: true, strong: true },
+            { text: "Private chat with the team", active: true, strong: true },
+            { text: "Access to new features", active: true },
             { text: "Commercial license", active: true },
             { text: "Priority support", active: true },
          ],
@@ -126,10 +119,12 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
             </div>
 
             <H3>
-               As a Club member, you will have access to a new way of experiencing Design Everywhere
-               with exclusive benefits and features tailored to each membership tier. <br/>Whether you
-               join as a Basic, Grow, or Premium membership, you'll be supporting the growth and
-               sustainability of Design Everywhere while gaining access to a range of perks designed
+               As a Club member, you will have access to a new way of experiencing Lafys with
+               exclusive benefits and features tailored to each membership tier.
+               <br />
+               <br />
+               Whether you join as a Basic, Grow, or Premium membership, you'll be supporting the
+               growth and sustainability of Lafys while gaining access to a range of perks designed
                for members.
             </H3>
          </div>
@@ -151,7 +146,7 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
                })}
                onClick={() => setPeriod("lifetime")}
             >
-               Lifetime (Best Value)
+               Lifetime <span>Best Value</span>
             </button>
          </div>
 
@@ -193,7 +188,7 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
                         </div>
 
                         <Button className={css.cta} variant={isFeatured ? "black" : "light"}>
-                           <span>Get started</span> <span>→</span>
+                           <span>{card.buttonName}</span> <span>→</span>
                         </Button>
                      </div>
 
