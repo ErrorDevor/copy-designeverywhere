@@ -65,7 +65,7 @@ const Page: React.FC = () => {
       <div className={css.root}>
          <div className={css.head}>
             <h2 className={css.head_title}>Refund Policy</h2>
-            <p className={css.head_lastUpdated}>Last updated: 30 January 2023</p>
+            <p className={css.head_lastUpdated}>Last updated: 10 March 2026</p>
          </div>
 
          <div className={css.content}>
