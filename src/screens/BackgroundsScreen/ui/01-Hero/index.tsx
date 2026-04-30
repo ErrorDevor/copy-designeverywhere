@@ -42,7 +42,7 @@ export const Hero: React.FC<Prop> = ({ clasName }) => {
                <div className={css.library_header_thumbnail_title}>
                   <div className={css.number}>
                      <span className={css.square_unicode}>■</span>
-                     <p>{post.aiTool?.name}</p>
+                     {/* <p>{post.aiTool?.name}</p> */}
                   </div>
 
                   <div>
