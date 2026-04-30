@@ -23,7 +23,7 @@
   margin: 0;
   color: #0d0d0d;
   white-space: nowrap;
-  font-size: clamp(48px, 9vw, 96px);
+  font-size: clamp(48px, 9vw, 96px) !important;
   line-height: 1;
   font-weight: 500;
   text-transform: uppercase;
