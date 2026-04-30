@@ -2,7 +2,11 @@
 
 import React from "react";
 
+import { useRouter } from "next/navigation";
+
 import clsx from "clsx";
+
+import { useAuth } from "features/Auth";
 
 import Image from "shared/ui/base/Image";
 import { Button } from "shared/ui/ui-kit/Button";
@@ -30,7 +34,7 @@ const pricingData = {
             { text: "Animated Backgrounds", active: false },
             { text: "Access to Future 1000+ hero prompts", active: true },
             { text: "10% OFF on QClay Services", active: true },
-            { text: "Commercial license", active: true, strong: true }
+            { text: "Commercial license", active: true, strong: true },
          ],
       },
       {
@@ -66,14 +70,13 @@ const pricingData = {
             { text: "Animated Backgrounds", active: false },
             { text: "Access to Future 1000+ hero prompts", active: true },
             { text: "10% OFF on QClay Services", active: true },
-            { text: "Commercial license", active: true, strong: true }
+            { text: "Commercial license", active: true, strong: true },
          ],
       },
       {
          price: "$80 $45",
          period: "Per month, cancel anytime",
-         description:
-            "The best plan, get full access on Lafys with a monthly subscription",
+         description: "The best plan, get full access on Lafys with a monthly subscription",
          image: "/images/grow.webp",
          buttonName: "Subscribe Monthly",
          benefits: [
@@ -107,8 +110,16 @@ const pricingData = {
 
 export const Pricing: React.FC<Prop> = ({ className }) => {
    const [period, setPeriod] = React.useState<Period>("monthly");
+   const { data } = useAuth();
+   const router = useRouter();
 
    const cards = pricingData[period];
+
+   const handlePrice = () => {
+      if (!data) {
+         router.push("/login");
+      }
+   };
 
    return (
       <section className={clsx(css.pricing, className)}>
@@ -187,7 +198,11 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
                            </div>
                         </div>
 
-                        <Button className={css.cta} variant={isFeatured ? "black" : "light"}>
+                        <Button
+                           className={css.cta}
+                           variant={isFeatured ? "black" : "light"}
+                           onClick={handlePrice}
+                        >
                            <span>{card.buttonName}</span> <span>→</span>
                         </Button>
                      </div>
