@@ -133,7 +133,7 @@ export const Footer: React.FC = () => {
                      <P>Privacy Policy</P>
                   </a>
                   <a href="/refund-policy">
-                     <P>Privacy Policy</P>
+                     <P>Refund Policy</P>
                   </a>
                </div>
             </div>
