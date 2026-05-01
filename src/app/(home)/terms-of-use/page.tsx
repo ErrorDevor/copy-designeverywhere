@@ -141,7 +141,7 @@ const Page: React.FC = () => {
             <div className={css.content_content} id="content">
                <div className="single-other-content  single-other-content-0">
                   <span className="other-title p3">1. Agreement to Terms</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         These Terms of Use constitute a legally binding agreement made between you,
                         whether personally or on behalf of an entity (“you”) and LAFYS
@@ -187,11 +187,11 @@ const Page: React.FC = () => {
                         parent or guardian read and agree to these Terms of Use prior to you using
                         the Site.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-1">
                   <span className="other-title p3">2. Intellectual Property Rights</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         Unless otherwise indicated, the Site is our proprietary property and all
                         source code, databases, functionality, software, website designs, audio,
@@ -216,11 +216,11 @@ const Page: React.FC = () => {
                         your personal, non-commercial use. We reserve all rights not expressly
                         granted to you in and to the Site, the Content and the Marks.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-2">
                   <span className="other-title p3">3. User Representations</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         By using the Site, you represent and warrant that: (1) you have the legal
                         capacity and you agree to comply with these Terms of Use; (2) you are not
@@ -238,11 +238,11 @@ const Page: React.FC = () => {
                         refuse any and all current or future use of the Site (or any portion
                         thereof).
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-3">
                   <span className="other-title p3">4. Prohibited Activities</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         You may not access or use the Site for any purpose other than that for which
                         we make the Site available. The Site may not be used in connection with any
@@ -896,7 +896,7 @@ const Page: React.FC = () => {
                            </span>
                         </li>
                      </ul>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-4">
                   <span className="other-title p3">5. Copyright Infringements</span>{" "}
@@ -914,7 +914,7 @@ const Page: React.FC = () => {
                </div>
                <div className="single-other-content  single-other-content-5">
                   <span className="other-title p3">6. User Generated Contributions</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         The Site does not offer users to submit or post content. We may provide you
                         with the opportunity to create, submit, post, display, transmit, perform,
@@ -1017,11 +1017,11 @@ const Page: React.FC = () => {
                         Use and may result in, among other things, termination or suspension of your
                         rights to use the Site.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-6">
                   <span className="other-title p3">7. Contribution Licence</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         You agree that we may access, store, process, and use any information and
                         personal data following the terms of the Privacy Policy.
@@ -1043,7 +1043,7 @@ const Page: React.FC = () => {
                         and all responsibility and to refrain from any legal action against us
                         regarding your Contributions.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-7">
                   <span className="other-title p3">8. Submissions</span>{" "}
@@ -1110,7 +1110,7 @@ const Page: React.FC = () => {
                </div>
                <div className="single-other-content  single-other-content-10">
                   <span className="other-title p3">11. Privacy Policy</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         We care about data privacy and security. Please review our Privacy Policy{" "}
                         <a href="https://lafys.com/privacy">here</a>. By
@@ -1128,11 +1128,11 @@ const Page: React.FC = () => {
                         to us without the requisite and verifiable parental consent, we will delete
                         that information from the Site as quickly as is reasonably practical.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-11">
                   <span className="other-title p3">12. Term and Termination</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         These Terms of Use shall remain in full force and effect while you use the
                         Site. WITHOUT LIMITING ANY OTHER PROVISION OF THESE TERMS OF USE, WE RESERVE
@@ -1153,11 +1153,11 @@ const Page: React.FC = () => {
                         account, we reserve the right to take appropriate legal action, including
                         without limitation pursuing civil, criminal, and injunctive redress.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-12">
                   <span className="other-title p3">13. Modifications and Interruptions</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         We reserve the right to change, modify, or remove the contents of the Site
                         at any time or for any reason at our sole discretion without notice.
@@ -1181,7 +1181,7 @@ const Page: React.FC = () => {
                         Site or to supply any corrections, updates, or releases in connection
                         therewith.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-13">
                   <span className="other-title p3">14. Governing Law</span>{" "}
@@ -1194,7 +1194,7 @@ const Page: React.FC = () => {
                </div>
                <div className="single-other-content  single-other-content-14">
                   <span className="other-title p3">15. Dispute Resolution</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>Informal Negotiations</strong>
                      </p>
@@ -1253,7 +1253,7 @@ const Page: React.FC = () => {
                         competent jurisdiction within the courts listed for jurisdiction above, and
                         the Parties agree to submit to the personal jurisdiction of that court.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-15">
                   <span className="other-title p3">16. Corrections</span>{" "}
@@ -1368,7 +1368,7 @@ const Page: React.FC = () => {
                </div>
                <div className="single-other-content  single-other-content-21">
                   <span className="other-title p3">22. Contact Us</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         In order to resolve a complaint regarding the Site or to receive further
                         information regarding the use of the Site, please mail us at:{" "}
@@ -1379,7 +1379,7 @@ const Page: React.FC = () => {
                         </a>
                         .
                      </p>
-                  </span>
+                  </div>
                </div>
             </div>
          </div>

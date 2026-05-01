@@ -123,7 +123,7 @@ const Page: React.FC = () => {
             <div className={css.content_content} id="content">
                <div className="single-other-content  single-other-content-0">
                   <span className="other-title p3">1. Introduction</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         This privacy policy for LAFYS ('Company', 'we', 'us', or 'our'),
                         describes how and why we might collect, store, use, and/or share ('process')
@@ -146,11 +146,11 @@ const Page: React.FC = () => {
                         still have any questions or concerns, please contact us at{" "}
                         <a href="mailto:info@lafys.com?">info@lafys.com</a>.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-1">
                   <span className="other-title p3">2. Summary of Key Points</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>This summary provides key points from our privacy policy.</p>
                      <ul>
                         <li>
@@ -234,11 +234,11 @@ const Page: React.FC = () => {
                            any request in accordance with applicable data protection laws.
                         </li>
                      </ul>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-2">
                   <span className="other-title p3">3. Information We Collect</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>Personal information you disclose to us</strong>
                      </p>
@@ -334,11 +334,11 @@ const Page: React.FC = () => {
                            to opt out, you may not be able to use certain aspects of the Services.
                         </li>
                      </ul>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-3">
                   <span className="other-title p3">4. How Do We Process Your Information?</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -465,11 +465,11 @@ const Page: React.FC = () => {
                            </span>
                         </li>
                      </ul>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-4">
                   <span className="other-title p3">5. Data Compliance</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -822,11 +822,11 @@ const Page: React.FC = () => {
                            </span>
                         </li>
                      </ul>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-5">
                   <span className="other-title p3">6. Sharing</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -865,11 +865,11 @@ const Page: React.FC = () => {
                            promotions.
                         </li>
                      </ul>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-6">
                   <span className="other-title p3">7. International Transfers</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -905,11 +905,11 @@ const Page: React.FC = () => {
                         implemented similar appropriate safeguards with our third-party service
                         providers and partners and further details can be provided upon request.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-7">
                   <span className="other-title p3">8. Data Retention</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -931,11 +931,11 @@ const Page: React.FC = () => {
                         information and isolate it from any further processing until deletion is
                         possible.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-8">
                   <span className="other-title p3">9. Information Safety</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -956,11 +956,11 @@ const Page: React.FC = () => {
                         personal information to and from our Services is at your own risk. You
                         should only access the Services within a secure environment.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-9">
                   <span className="other-title p3">10. Minors Information</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -979,11 +979,11 @@ const Page: React.FC = () => {
                         children under the age of 13, please contact us at{" "}
                         <a href="mailto:info@lafys.com?">info@lafys.com</a>.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-10">
                   <span className="other-title p3">11. Privacy Rights</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -1071,7 +1071,7 @@ const Page: React.FC = () => {
                         us at{" "}
                         <a href="mailto:info@lafys.com?">info@lafys.com</a>.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-11">
                   <span className="other-title p3">12. Do-not-track Features</span>{" "}
@@ -1089,7 +1089,7 @@ const Page: React.FC = () => {
                </div>
                <div className="single-other-content  single-other-content-12">
                   <span className="other-title p3">13. Notice Updates</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>In Short:</strong>{" "}
                         <em>
@@ -1106,11 +1106,11 @@ const Page: React.FC = () => {
                         encourage you to review this privacy policy frequently to be informed of how
                         we are protecting your information.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-13">
                   <span className="other-title p3">14. Cookie Policy</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         <strong>What are cookies?</strong>
                      </p>
@@ -1229,20 +1229,20 @@ const Page: React.FC = () => {
                         technologies are reliant on cookies to function properly, and so declining
                         cookies will impair their functioning.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-14">
                   <span className="other-title p3">15. Contact Us</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         If you have questions or comments about this notice, you may email us at{" "}
                         <a href="mailto:info@lafys.com?">info@lafys.com</a>.
                      </p>
-                  </span>
+                  </div>
                </div>
                <div className="single-other-content  single-other-content-15">
                   <span className="other-title p3">16. Request Access</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
                         Based on the applicable laws of your country, you may have the right to
                         request access to the personal information we collect from you, change that
@@ -1250,7 +1250,7 @@ const Page: React.FC = () => {
                         personal information, please email us at:{" "}
                         <a href="mailto:info@lafys.com?">info@lafys.com</a>.
                      </p>
-                  </span>
+                  </div>
                </div>
             </div>
          </div>

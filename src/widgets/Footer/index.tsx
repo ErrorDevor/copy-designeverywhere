@@ -2,15 +2,15 @@
 
 import React from "react";
 
+import axios from "axios";
 import clsx from "clsx";
 
+import { fetchClientApi } from "shared/api/lib/fetchClientApi";
+import { getApiUrl } from "shared/api/lib/getApiUrl";
 import { Button } from "shared/ui/ui-kit/Button";
 import { H2, H4, P } from "shared/ui/ui-kit/Text";
 
 import css from "./Footer.module.scss";
-import { fetchClientApi } from "shared/api/lib/fetchClientApi";
-import axios from "axios";
-import { getApiUrl } from "shared/api/lib/getApiUrl";
 
 export const Footer: React.FC = () => {
    const now = new Date();
@@ -36,7 +36,7 @@ export const Footer: React.FC = () => {
       if (left.trim() === "" || right.trim() === "") {
          return false;
       }
-      if(!right.includes('.') || right.endsWith('.')) {
+      if (!right.includes(".") || right.endsWith(".")) {
          return false;
       }
       return true;
@@ -48,14 +48,14 @@ export const Footer: React.FC = () => {
       try {
          setIsSending(true);
 
-         await axios.post('/api/newsletter', { email });
+         await axios.post("/api/newsletter", { email });
 
          setSent(true);
       } catch (error) {
          setIsSending(false);
          setEmail("");
       }
-   }
+   };
 
    return (
       <footer className={css.footer}>
@@ -130,6 +130,9 @@ export const Footer: React.FC = () => {
                      <P>Terms of Use</P>
                   </a>
                   <a href="/privacy">
+                     <P>Privacy Policy</P>
+                  </a>
+                  <a href="/refund-policy">
                      <P>Privacy Policy</P>
                   </a>
                </div>

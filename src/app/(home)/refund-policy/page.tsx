@@ -78,35 +78,38 @@ const Page: React.FC = () => {
             <div className={css.content_content} id="content">
                <div className="single-other-content  single-other-content-0">
                   <span className="other-title p3">1. Refund Policy</span>{" "}
-                  <span className="other-description p3">
+                  <div className="other-description p3">
                      <p>
-                        At Lafys, we want our customers to feel confident when purchasing our
-                        products and subscriptions.
+                        Unfortunately, we do not offer refunds for memberships. If you decide to
+                        cancel your membership, you may do so at any time, but payments already made
+                        are non-refundable.
                      </p>
                      <p />
                      <p>
-                        If you are eligible for a refund, the refunded amount will be returned to
-                        your original payment method within 14 business days after your refund
-                        request has been reviewed and approved.
+                        After cancellation, you will still have access to all membership benefits
+                        until the end of your current billing cycle.
                      </p>
                      <p />
                      <p>
-                        Please note that lifetime subscriptions are non-refundable. Once a lifetime
-                        subscription has been purchased and activated, it cannot be cancelled,
+                        For example, if you signed up for a monthly membership on April 5, 2026, you
+                        will continue to have access to your membership until May 5, 2026.
+                     </p>
+                     <p />
+                     <p>
+                        Please note that lifetime memberships are also non-refundable. Once
+                        purchased and activated, a lifetime membership cannot be cancelled,
                         refunded, or exchanged.
                      </p>
-                     <p />
-                     <p>
-                        To request a refund, please contact our support team with your order details
-                        and the reason for your request. We reserve the right to review each refund
-                        request individually and approve or decline it based on the terms of this
-                        Refund Policy.
-                     </p>
-                     <p>
-                        By purchasing a subscription or product from Lafys, you agree to this Refund
-                        Policy.
-                     </p>
-                  </span>
+                     <p>To cancel your membership, follow these steps:</p>
+                     <p>Sign in to your account.</p>
+                     <ul>
+                        <li>Click on your avatar icon in the top-right corner of the page.</li>
+                        <li>Select Membership from the dropdown menu.</li>
+                        <li>Click Manage Membership, then click Manage under Manage Billing.</li>
+                        <li>You will be redirected to the Stripe billing page.</li>
+                        <li>Click Cancel Plan.</li>
+                     </ul>
+                  </div>
                </div>
             </div>
          </div>
