@@ -109,6 +109,29 @@
       margin-top: 22px;
       width: 22.6851851852vw;
    }
+
+   &_controls {
+      position: absolute;
+      right: 1rem;
+      top: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+   }
+}
+
+.comingSoon {
+   height: 2.8rem;
+   padding: 0 0.6rem;
+   border-radius: 0.8rem;
+   background: rgb(13, 13, 13);
+
+   @include fontABCDiatype(1.4rem, 1.1, -0.03em, 400, #fff);
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   text-align: center;
 }
 
 .thumbnail_grid {

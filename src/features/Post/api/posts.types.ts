@@ -10,7 +10,7 @@ export interface Post {
       id: string;
       value: string;
    }>;
-   plan: "premium" | "free";
+   plan: "premium" | "free" | "coming-soon";
    prompt?: string;
    category?: Category;
    aiTool: AiTool[];

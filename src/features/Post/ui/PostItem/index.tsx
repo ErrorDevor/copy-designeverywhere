@@ -7,11 +7,11 @@ import { fileToServerPath } from "shared/api/lib/fileToServerPath";
 import { ImageApi } from "shared/api/ui/ImageApi";
 import { NextLink } from "shared/ui/base/NextLink";
 import { Button } from "shared/ui/ui-kit/Button";
+import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
 import { LinkButton } from "shared/ui/ui-kit/LinkButton";
 import { H4, H5, P } from "shared/ui/ui-kit/Text";
 
 import css from "./PostItem.module.scss";
-import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
 
 interface Props {
    data: Post;
@@ -43,15 +43,22 @@ export const PostItem: React.FC<Props> = (props) => {
                />
             )}
 
-            <CopyPrompt prompt={data.prompt}>
-               Copy Prompt
-            </CopyPrompt>
+            <div className={css.thumbnail_controls}>
+               <CopyPrompt prompt={data.prompt}>Copy Prompt</CopyPrompt>
+               {data.plan === "coming-soon" && (
+                  <p className={css.comingSoon}>Coming Soon</p>
+               )}
+            </div>
          </div>
 
          <div className={css.thumbnail_title}>
             <NextLink className={css.thumbnail_number}>
                {/* <span className={css.square_unicode}>■</span> */}
-               <p>{(data.aiTool || []).map(item => <span key={item.name}>{item.name}</span>)}</p>
+               <p>
+                  {(data.aiTool || []).map((item) => (
+                     <span key={item.name}>{item.name}</span>
+                  ))}
+               </p>
             </NextLink>
 
             <div className={css.thumbnail_title_wrap}>
@@ -81,10 +88,7 @@ export const PostItem: React.FC<Props> = (props) => {
                ))}
 
                {!showAllTags && data.tags.length > 4 && (
-                  <button
-                     className={css.more_button}
-                     onClick={() => setShowAllTags(true)}
-                  >
+                  <button className={css.more_button} onClick={() => setShowAllTags(true)}>
                      ...
                   </button>
                )}

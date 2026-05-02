@@ -1,8 +1,5 @@
 .link_button {
    @include flexCenter();
-   position: absolute;
-   right: 1rem;
-   top: 1rem;
 
    &_icon {
       align-items: center;
