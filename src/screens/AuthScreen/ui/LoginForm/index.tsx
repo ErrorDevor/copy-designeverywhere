@@ -56,7 +56,12 @@ export const LoginForm: React.FC = () => {
             <Input name="login" label="Email*" placeholder="Enter email" />
             <Input name="password" label="Password*" placeholder="Enter password" type="password" />
             {error && <p className={css.error}>{error}</p>}
-            <Button className={css.form_submitBtn} variant="black" type="submit">
+            <Button
+               className={css.form_submitBtn}
+               disabled={formik.isSubmitting}
+               variant="black"
+               type="submit"
+            >
                Login
             </Button>
             <p className={css.form_notMember}>Not a member yet?</p>

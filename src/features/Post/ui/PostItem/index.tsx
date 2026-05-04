@@ -15,10 +15,11 @@ import css from "./PostItem.module.scss";
 
 interface Props {
    data: Post;
+   onSaveEmail(postId: string): void;
 }
 
 export const PostItem: React.FC<Props> = (props) => {
-   const { data } = props;
+   const { data, onSaveEmail } = props;
    const [showAllTags, setShowAllTags] = React.useState(false);
 
    const contentType = React.useMemo(() => {
@@ -44,7 +45,16 @@ export const PostItem: React.FC<Props> = (props) => {
             )}
 
             <div className={css.thumbnail_controls}>
-               {data.plan === "free" && <CopyPrompt prompt={data.prompt}>Copy Prompt</CopyPrompt>}
+               {(data.plan === "free" || data.plan === "coming-soon") && (
+                  <CopyPrompt
+                     prompt={data.prompt}
+                     onSave={
+                        data.plan === "coming-soon" ? onSaveEmail.bind(null, data.id) : undefined
+                     }
+                  >
+                     Copy Prompt
+                  </CopyPrompt>
+               )}
                {data.plan === "premium" && (
                   <a href="/pricing" className={css.thumbnail_premium}>
                      <svg

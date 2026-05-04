@@ -8,7 +8,7 @@ import clsx from "clsx";
 import qs from "qs";
 
 import { Filter } from "features/Filter";
-import { PostItem } from "features/Post";
+import { PostItem, PostLeaveEmail } from "features/Post";
 import { usePosts } from "features/Post/model/usePosts";
 
 import css from "./Library.module.scss";
@@ -19,6 +19,10 @@ interface Prop {
 
 export const Library: React.FC<Prop> = ({ clasName }) => {
    const libRef = React.useRef<HTMLDivElement>(null);
+   const [saveEmail, setSaveEmail] = React.useState({
+      active: false,
+      postId: null as string | null,
+   });
 
    const searchParams = useSearchParams();
    const [filter, setFilter] = React.useState({
@@ -26,6 +30,10 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
       aiTools: searchParams.get("aiTools")?.split(",") || [],
       tags: searchParams.get("tags")?.split(",") || [],
    });
+
+   const handleSaveEmail = (postId: string) => {
+      setSaveEmail({ active: true, postId });
+   };
 
    const postData = usePosts(filter);
 
@@ -93,7 +101,7 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
          <div className={clsx(css.library, clasName)} ref={libRef}>
             <div className={css.library_list}>
                {(postData.data?.docs || []).map((post) => (
-                  <PostItem data={post} key={post.id} />
+                  <PostItem data={post} onSaveEmail={handleSaveEmail} key={post.id} />
                ))}
             </div>
 
@@ -141,6 +149,11 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
                </button>
             </div>
          </div>
+         <PostLeaveEmail
+            active={saveEmail.active}
+            onClose={() => setSaveEmail({ ...saveEmail, active: false })}
+            postId={saveEmail.postId || ""}
+         />
       </section>
    );
 };

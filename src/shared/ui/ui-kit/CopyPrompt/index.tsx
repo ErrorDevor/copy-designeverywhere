@@ -12,14 +12,18 @@ interface Prop {
    className?: string;
    prompt?: string;
    children?: React.ReactNode;
+   onSave?: VoidFunction
 }
 
-export const CopyPrompt: React.FC<Prop> = ({ className, prompt, children }) => {
+export const CopyPrompt: React.FC<Prop> = ({ className, prompt, onSave }) => {
    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
    const [isCopied, setCopied] = React.useState(false);
 
    const handleCopy = () => {
-      if (isCopied || !prompt) return;
+      if (isCopied || !prompt || onSave) {
+         onSave?.();
+         return;
+      }
 
       copyInput(prompt);
 
