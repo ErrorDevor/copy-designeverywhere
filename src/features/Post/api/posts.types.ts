@@ -6,14 +6,17 @@ export interface Post {
    slug: string;
    sectionType?: string;
    preview: ImageType;
-   tags: Array<{
-      id: string;
-      value: string;
-   }>;
+   tagsList: Array<PostTag>;
    plan: "premium" | "free" | "coming-soon";
    prompt?: string;
    category?: Category;
    aiTool: AiTool[];
+}
+
+export interface PostTag {
+   id: string;
+   value: string;
+   count: number;
 }
 
 export interface PostList extends PayloadPagination {

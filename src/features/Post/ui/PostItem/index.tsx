@@ -81,13 +81,13 @@ export const PostItem: React.FC<Props> = (props) => {
                   {item.location}
                </Button> */}
 
-               {data.tags.slice(0, showAllTags ? 999 : 4).map((tag) => (
+               {data.tagsList.slice(0, showAllTags ? 999 : 4).map((tag) => (
                   <li key={tag.id} className={css.thumbnail_tags_item}>
                      <P>{tag.value}</P>
                   </li>
                ))}
 
-               {!showAllTags && data.tags.length > 4 && (
+               {!showAllTags && data.tagsList.length > 4 && (
                   <button className={css.more_button} onClick={() => setShowAllTags(true)}>
                      ...
                   </button>
