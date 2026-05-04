@@ -4,8 +4,7 @@ import { BackgroundsScreen } from "screens/BackgroundsScreen";
 
 import { getQueryClient } from "app/providers/ReactQueryProvider/getQueryClient";
 
-import { GET_BACKGROUND_POSTS_KEY } from "features/Post";
-import { GET_POSTS_KEY, getPostsFilter } from "features/Post/model/usePosts";
+import { getPostsFilter } from "features/Post/model/usePosts";
 
 import { fetchServerApi } from "shared/api/lib/fetchServerApi";
 import { PageWithSearchParams } from "shared/api/types";
@@ -13,11 +12,12 @@ import { PageWithSearchParams } from "shared/api/types";
 export const dynamic = "force-dynamic";
 
 export default async function Home({ searchParams }: PageWithSearchParams) {
-   const { page, aiTools } = await searchParams;
+   const { page, aiTools, tags } = await searchParams;
 
    const queryPosts = getPostsFilter({
       page: Number(page) || 1,
       aiTools: aiTools?.toString().split(",") || [],
+      tags: tags?.toString().split(",") || [],
    });
 
    const posts = await fetchServerApi("/background-posts", {

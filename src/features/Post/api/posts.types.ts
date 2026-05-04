@@ -1,3 +1,5 @@
+import { Profile } from "features/Profile";
+
 import { ImageType, PayloadPagination } from "shared/api/types";
 
 export interface Post {
@@ -11,12 +13,17 @@ export interface Post {
    prompt?: string;
    category?: Category;
    aiTool: AiTool[];
+   createdBy: Profile | null;
 }
 
 export interface PostTag {
    id: string;
    value: string;
    count: number;
+}
+
+export interface PostTagList extends PayloadPagination {
+   docs: PostTag[];
 }
 
 export interface PostList extends PayloadPagination {

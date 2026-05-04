@@ -5,7 +5,7 @@ import { CSSTransition } from "react-transition-group";
 
 import clsx from "clsx";
 
-import { useAiTools } from "features/Post";
+import { useAiTools, useTags } from "features/Post";
 import { PostsFilter } from "features/Post/model/usePosts";
 
 import { H6 } from "shared/ui/ui-kit/Text";
@@ -64,22 +64,35 @@ const SvgFilter = () => (
    </svg>
 );
 
+enum Tabs {
+   AI_TOOLS,
+   TAGS,
+}
+
 export const Filter: React.FC<Prop> = ({ filter, onChange }) => {
+   const [currentTab, setCurrentTab] = React.useState(Tabs.AI_TOOLS);
+
    const [activeFilter, setActiveFilter] = React.useState(false);
    const filterRef = React.useRef<HTMLDivElement>(null);
 
    const [localFilter, setLocalFilter] = React.useState(filter);
 
    const aiTools = useAiTools();
+   const tags = useTags();
 
-   const tools = aiTools.data?.docs || [];
+   const tagsList = tags.data?.docs || [];
+   const toolsList = aiTools.data?.docs || [];
 
-   const columns = React.useMemo(() => {
-      return splitToColumns(tools, 5, 5);
-   }, [tools]);
+   const toolsColumns = React.useMemo(() => {
+      return splitToColumns(toolsList, 5, 5);
+   }, [toolsList]);
+
+   const tagsColumns = React.useMemo(() => {
+      return splitToColumns(tagsList, 5, 5);
+   }, [tagsList]);
 
    const handleClear = () => {
-      onChange({ ...filter, aiTools: [], page: 1 });
+      onChange({ ...filter, aiTools: [], tags: [], page: 1 });
       setActiveFilter(false);
    };
 
@@ -143,33 +156,71 @@ export const Filter: React.FC<Prop> = ({ filter, onChange }) => {
 
                   <div className={css.filter_modal_content}>
                      <div className={css.filter_modal_list}>
-                        <div className={clsx(css.filter_modal_list_tab, css.active)}>
-                           <span>Ai Tool</span> <sup>1</sup>
+                        <div
+                           className={clsx(
+                              css.filter_modal_list_tab,
+                              currentTab === Tabs.AI_TOOLS && css.active
+                           )}
+                           onClick={() => setCurrentTab(Tabs.AI_TOOLS)}
+                        >
+                           <span>Ai Tool</span> <sup>{toolsList.length}</sup>
+                        </div>
+                        <div
+                           className={clsx(
+                              css.filter_modal_list_tab,
+                              currentTab === Tabs.TAGS && css.active
+                           )}
+                           onClick={() => setCurrentTab(Tabs.TAGS)}
+                        >
+                           <span>Tags</span> <sup>{tagsList.length}</sup>
                         </div>
                      </div>
 
                      <div className={css.filter_modal_data}>
-                        {columns.map((col, id) => (
-                           <div className={css.filter_modal_data_column} key={id}>
-                              {col.map((item) => (
-                                 <button
-                                    className={clsx(
-                                       css.filter_modal_data_item,
-                                       localFilter.aiTools.includes(item.name) && css.active
-                                    )}
-                                    onClick={() =>
-                                       setLocalFilter({
-                                          ...localFilter,
-                                          aiTools: toggleItem(localFilter.aiTools, item.name),
-                                       })
-                                    }
-                                    key={item.id}
-                                 >
-                                    {item.name}
-                                 </button>
-                              ))}
-                           </div>
-                        ))}
+                        {currentTab === Tabs.AI_TOOLS &&
+                           toolsColumns.map((col, id) => (
+                              <div className={css.filter_modal_data_column} key={id}>
+                                 {col.map((item) => (
+                                    <button
+                                       className={clsx(
+                                          css.filter_modal_data_item,
+                                          localFilter.aiTools.includes(item.name) && css.active
+                                       )}
+                                       onClick={() =>
+                                          setLocalFilter({
+                                             ...localFilter,
+                                             aiTools: toggleItem(localFilter.aiTools, item.name),
+                                          })
+                                       }
+                                       key={item.id}
+                                    >
+                                       {item.name}
+                                    </button>
+                                 ))}
+                              </div>
+                           ))}
+                        {currentTab === Tabs.TAGS &&
+                           tagsColumns.map((col, id) => (
+                              <div className={css.filter_modal_data_column} key={id}>
+                                 {col.map((item) => (
+                                    <button
+                                       className={clsx(
+                                          css.filter_modal_data_item,
+                                          localFilter.tags.includes(item.value) && css.active
+                                       )}
+                                       onClick={() =>
+                                          setLocalFilter({
+                                             ...localFilter,
+                                             tags: toggleItem(localFilter.tags, item.value),
+                                          })
+                                       }
+                                       key={item.id}
+                                    >
+                                       {item.value}
+                                    </button>
+                                 ))}
+                              </div>
+                           ))}
                      </div>
                   </div>
 

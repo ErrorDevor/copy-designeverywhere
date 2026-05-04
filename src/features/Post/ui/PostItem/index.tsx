@@ -44,16 +44,40 @@ export const PostItem: React.FC<Props> = (props) => {
             )}
 
             <div className={css.thumbnail_controls}>
-               <CopyPrompt prompt={data.prompt}>Copy Prompt</CopyPrompt>
-               {data.plan === "coming-soon" && (
-                  <p className={css.comingSoon}>Coming Soon</p>
+               {data.plan === "free" && <CopyPrompt prompt={data.prompt}>Copy Prompt</CopyPrompt>}
+               {data.plan === "premium" && (
+                  <a href="/pricing" className={css.thumbnail_premium}>
+                     <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                     >
+                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                     </svg>
+                     Premium
+                  </a>
                )}
+               {data.plan === "coming-soon" && <p className={css.comingSoon}>Coming Soon</p>}
             </div>
          </div>
 
+         {data.createdBy && (
+            <div className={css.created}>
+               <div className={css.created_avatar}>
+                  {data.createdBy.avatar && (
+                     <ImageApi className={css.created_avatar_img} data={data.createdBy.avatar} />
+                  )}
+               </div>
+               <p className={css.created_name}>{data.createdBy.name}</p>
+            </div>
+         )}
+
          <div className={css.thumbnail_title}>
             <NextLink className={css.thumbnail_number}>
-               {/* <span className={css.square_unicode}>■</span> */}
                <p>
                   {(data.aiTool || []).map((item) => (
                      <span key={item.name}>{item.name}</span>
@@ -74,13 +98,6 @@ export const PostItem: React.FC<Props> = (props) => {
 
          <div className={css.thumbnail_tags}>
             <ul className={css.thumbnail_tags_wrapper}>
-               {/* <Button variant="light" className={css.location_button}>
-                  <svg fill="none" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 10">
-                     <path d="M4 0C1.79 0 0 1.746 0 3.9c0 2.406 2.333 4.855 3.435 5.88a.834.834 0 0 0 1.13 0C5.668 8.755 8 6.306 8 3.9 8.002 1.747 6.21 0 4 0Zm0 5.493c-.857 0-1.555-.68-1.555-1.517 0-.837.698-1.517 1.556-1.517.858 0 1.555.68 1.555 1.517 0 .837-.697 1.517-1.555 1.517Z"></path>
-                  </svg>
-                  {item.location}
-               </Button> */}
-
                {data.tagsList.slice(0, showAllTags ? 999 : 4).map((tag) => (
                   <li key={tag.id} className={css.thumbnail_tags_item}>
                      <P>{tag.value}</P>

@@ -8,6 +8,8 @@
       border-radius: 5px;
       cursor: pointer;
       display: flex;
+      align-items: center;
+      gap: 0.4rem;
       height: 28px;
       padding: 0 6px;
       justify-content: center;
@@ -17,7 +19,10 @@
       letter-spacing: -0.02em;
 
       svg {
-         fill: #fff;
+         stroke: #fff;
+         width: 1.6rem;
+         height: 1.6rem;
+         transform: translateY(-0.1em);
       }
 
       &:hover {

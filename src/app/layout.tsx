@@ -30,8 +30,8 @@ const monumentMono = localFont({
 });
 
 export const metadata: Metadata = {
-   title: "Lafys",
-   description: "",
+   title: "Lafys - Premium Website Prompts",
+   description: "Lafys - Premium Website Prompts",
    icons: {
       icon: "/favicon.svg",
       apple: "/favicon.svg",

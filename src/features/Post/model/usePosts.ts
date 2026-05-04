@@ -9,6 +9,7 @@ import { fetchClientApi } from "shared/api/lib/fetchClientApi";
 export interface PostsFilter {
    page: number;
    aiTools: string[];
+   tags: string[];
 }
 
 export const GET_POSTS_KEY = "get-posts";
@@ -22,8 +23,12 @@ export const getPostsFilter = (filter: Partial<PostsFilter> = {}) => {
             filter.aiTools && filter.aiTools.length > 0
                ? { in: filter.aiTools.join(",") }
                : undefined,
+         "tagsList.value":
+            filter.tags && filter.tags.length > 0
+               ? { in: filter.tags.join(",") }
+               : undefined,
       },
-      sort: '-priority,createdAt'
+      sort: "-priority,createdAt",
    };
 };
 
