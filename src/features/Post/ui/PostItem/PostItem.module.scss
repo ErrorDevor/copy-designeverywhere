@@ -181,6 +181,8 @@
       background: #e9e9e9;
       flex-shrink: 0;
 
+      transform: translateY(-0.25rem);
+
       &:has(img) {
          background: transparent;
       }
