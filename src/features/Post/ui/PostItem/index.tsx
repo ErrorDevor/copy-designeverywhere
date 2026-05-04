@@ -15,7 +15,7 @@ import css from "./PostItem.module.scss";
 
 interface Props {
    data: Post;
-   onSaveEmail(postId: string): void;
+   onSaveEmail?(postId: string): void;
 }
 
 export const PostItem: React.FC<Props> = (props) => {
@@ -49,7 +49,7 @@ export const PostItem: React.FC<Props> = (props) => {
                   <CopyPrompt
                      prompt={data.prompt}
                      onSave={
-                        data.plan === "coming-soon" ? onSaveEmail.bind(null, data.id) : undefined
+                        data.plan === "coming-soon" ? onSaveEmail?.bind(null, data.id) : undefined
                      }
                   >
                      Copy Prompt
