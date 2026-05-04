@@ -23,6 +23,7 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
    const [filter, setFilter] = React.useState({
       page: Number(searchParams.get("page") || 1),
       aiTools: searchParams.get("aiTools")?.split(",") || [],
+      tags: searchParams.get("tags")?.split(",") || [],
    });
 
    const postData = useBackgroundPosts(filter);
@@ -79,9 +80,10 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
       const queryString = qs.stringify({
          page: filter.page > 1 ? filter.page : undefined,
          aiTools: filter.aiTools.length > 0 ? filter.aiTools.join(",") : undefined,
+         tags: filter.tags.length > 0 ? filter.tags.join(",") : undefined,
       });
 
-      // window.history.replaceState({}, "", queryString ? `/?${queryString}` : "/");
+      window.history.replaceState({}, "", queryString ? `/?${queryString}` : "/");
    }, [filter]);
 
    return (
