@@ -12,7 +12,7 @@ interface Prop {
    className?: string;
    prompt?: string;
    children?: React.ReactNode;
-   onSave?: VoidFunction
+   onSave?: VoidFunction;
 }
 
 export const CopyPrompt: React.FC<Prop> = ({ className, prompt, onSave }) => {
@@ -45,7 +45,11 @@ export const CopyPrompt: React.FC<Prop> = ({ className, prompt, onSave }) => {
    }, []);
 
    return (
-      <button className={clsx(css.link_button, className)} onClick={handleCopy}>
+      <button
+         className={clsx(css.link_button, className)}
+         disabled={prompt?.trim() === ""}
+         onClick={handleCopy}
+      >
          <span className={css.link_button_icon}>
             {isCopied ? (
                "✔ Copied"

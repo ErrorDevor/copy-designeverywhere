@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
 
 import { AuthProvider } from "features/Auth/providers/AuthProvider";
+import { FetchSubscriptionPlan } from "features/Pricing";
 
 //abc-diatype-mono-regular.otf
 //ABC-Diatype.woff2
@@ -47,7 +48,10 @@ export default function RootLayout({
       <html lang="en" className={`${abcdiatype.variable} ${monumentMono.variable}`}>
          <body>
             <ReactQueryProvider>
-               <AuthProvider>{children}</AuthProvider>
+               <AuthProvider>
+                  {children} 
+                  <FetchSubscriptionPlan />
+               </AuthProvider>
             </ReactQueryProvider>
          </body>
       </html>

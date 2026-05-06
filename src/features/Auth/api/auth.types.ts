@@ -3,11 +3,7 @@ export interface User {
    createdAt: string;
    role: string;
    email: string;
-   sessions: Array<{
-      id: string;
-      createdAt: string;
-      expiresAt: string;
-   }>;
+   plan: "Basic" | "Grow" | "Premium" | null | undefined;
 }
 
 export interface AuthLoginDTO {

@@ -7,9 +7,13 @@ import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
 import { useAuth } from "features/Auth";
+import { usePricings } from "features/Pricing";
+import { Pricing as PricingType } from "features/Pricing/api/pricing.types";
+import { subscriptionApi } from "features/Pricing/api/subscriptionApi";
 
-import Image from "shared/ui/base/Image";
+import { ImageApi } from "shared/api/ui/ImageApi";
 import { Button } from "shared/ui/ui-kit/Button";
+import { LoaderIcon } from "shared/ui/ui-kit/LoaderIcon";
 import { H2, H3, H4, H5, P } from "shared/ui/ui-kit/Text";
 
 import css from "./Pricing.module.scss";
@@ -20,104 +24,40 @@ interface Prop {
 
 type Period = "monthly" | "lifetime";
 
-const pricingData = {
-   lifetime: [
-      {
-         price: "$149",
-         period: "Lifetime Access - One-time Payment",
-         description: "Get started fast with unlimited access to all available components",
-         image: "/images/basic.webp",
-         buttonName: "Get Basic Access",
-         benefits: [
-            { text: "Unlimited access", active: true },
-            { text: "30+ AI Ready Templates", active: false },
-            { text: "Animated Backgrounds", active: false },
-            { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "10% OFF on QClay Services", active: true },
-            { text: "Commercial license", active: true, strong: true },
-         ],
-      },
-      {
-         price: "$497 $199",
-         period: "Lifetime Access - One-time Payment",
-         description:
-            "The most valuable plan, get lifetime access on MotionSites with a one-time payment",
-         image: "/images/grow.webp",
-         buttonName: "Get Grow Access",
-         benefits: [
-            { text: "Unlimited access", active: true },
-            { text: "30+ AI Ready Templates", active: true },
-            { text: "Animated Backgrounds", active: true },
-            { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "10% OFF on QClay Services", active: true },
-            { text: "Commercial license", active: true, strong: true },
-            { text: "Priority support", active: true },
-            { text: "Access to payouts for your prompts", active: true },
-         ],
-      },
-   ],
-
-   monthly: [
-      {
-         price: "$30",
-         period: "Per month, cancel anytime",
-         description: "Get started fast with unlimited access to all available components",
-         image: "/images/basic.webp",
-         buttonName: "Subscribe Monthly",
-         benefits: [
-            { text: "Unlimited access", active: true },
-            { text: "30+ AI Ready Templates", active: false },
-            { text: "Animated Backgrounds", active: false },
-            { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "10% OFF on QClay Services", active: true },
-            { text: "Commercial license", active: true, strong: true },
-         ],
-      },
-      {
-         price: "$80 $45",
-         period: "Per month, cancel anytime",
-         description: "The best plan, get full access on Lafys with a monthly subscription",
-         image: "/images/grow.webp",
-         buttonName: "Subscribe Monthly",
-         benefits: [
-            { text: "Unlimited access", active: true },
-            { text: "30+ AI Ready Templates", active: true },
-            { text: "Animated Backgrounds", active: true },
-            { text: "Access to Future 1000+ hero prompts", active: true },
-            { text: "10% OFF on QClay Services", active: true },
-            { text: "Commercial license", active: true, strong: true },
-            { text: "Priority support", active: true },
-            { text: "Access to payouts for your prompts", active: true },
-         ],
-      },
-      {
-         price: "$100",
-         period: "Per month, cancel anytime",
-         description: "Build your own products or websites and resell unlimited time",
-         image: "/images/premium.webp",
-         buttonName: "Subscribe Monthly",
-         benefits: [
-            { text: "Everything in Grow", active: true, strong: true },
-            { text: "Resell unlimited time", active: true, strong: true },
-            { text: "Private chat with the team", active: true, strong: true },
-            { text: "Access to new features", active: true },
-            { text: "Commercial license", active: true },
-            { text: "Priority support", active: true },
-         ],
-      },
-   ],
-};
-
 export const Pricing: React.FC<Prop> = ({ className }) => {
    const [period, setPeriod] = React.useState<Period>("monthly");
    const { data } = useAuth();
    const router = useRouter();
 
-   const cards = pricingData[period];
+   const [priceActiveId, setPriceActiveId] = React.useState<string | null>(null);
+
+   const { pricings } = usePricings();
+
+   const cards = period === "lifetime" ? pricings.payments : pricings.subscriptions;
 
    const handlePrice = () => {
       if (!data) {
          router.push("/login");
+      }
+   };
+
+   const handleSubscribe = async (pricing: PricingType) => {
+      if (priceActiveId) {
+         return;
+      }
+
+      setPriceActiveId(pricing.id);
+
+      try {
+         const response = await subscriptionApi.subscribe({
+            priceId: pricing.id,
+         });
+
+         if (response.sessionUrl) {
+            window.location.href = response.sessionUrl;
+         }
+      } finally {
+         setPriceActiveId(null);
       }
    };
 
@@ -142,44 +82,48 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
 
          {/* Toggle */}
          <div className={css.toggle}>
-            <button
-               className={clsx(css.toggle_btn, {
-                  [css.active]: period === "monthly",
-               })}
-               onClick={() => setPeriod("monthly")}
-            >
-               Monthly
-            </button>
+            {pricings.subscriptions.length > 0 && (
+               <button
+                  className={clsx(css.toggle_btn, {
+                     [css.active]: period === "monthly",
+                  })}
+                  onClick={() => setPeriod("monthly")}
+               >
+                  Monthly
+               </button>
+            )}
 
-            <button
-               className={clsx(css.toggle_btn, {
-                  [css.active]: period === "lifetime",
-               })}
-               onClick={() => setPeriod("lifetime")}
-            >
-               Lifetime <span>Best Value</span>
-            </button>
+            {pricings.payments.length > 0 && (
+               <button
+                  className={clsx(css.toggle_btn, {
+                     [css.active]: period === "lifetime",
+                  })}
+                  onClick={() => setPeriod("lifetime")}
+               >
+                  Lifetime <span>Best Value</span>
+               </button>
+            )}
          </div>
 
          {/* Cards */}
          <div className={css.cards}>
             {cards.map((card, index) => {
                const isFeatured = index === 1;
-               const prices = card.price.split(" ");
+               const prices = card.oldPrice ? [card.oldPrice, card.price] : [card.price];
                return (
                   <div
-                     key={index}
+                     key={card.id}
                      className={clsx(css.card, {
                         [css.featured]: isFeatured,
                      })}
                   >
                      <div className={css.card_top}>
                         <div className={css.card_image}>
-                           <Image.Default src={card.image} />
+                           <ImageApi data={card.preview} />
                         </div>
 
                         <div className={css.price_wrap}>
-                           <H2>{card.description}</H2>
+                           <H2>{card.title}</H2>
 
                            <div className={css.price}>
                               <H3 className={css.price_value}>
@@ -190,33 +134,38 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
                                           [css.old_price]: prices.length > 1 && priceIndex === 0,
                                        })}
                                     >
-                                       {price}
+                                       ${price}
                                     </span>
                                  ))}
                               </H3>
-                              <P>{card.period}</P>
+                              <P>{card.hint}</P>
                            </div>
                         </div>
 
                         <Button
                            className={css.cta}
                            variant={isFeatured ? "black" : "light"}
-                           onClick={handlePrice}
+                           onClick={handleSubscribe.bind(null, card)}
                         >
-                           <span>{card.buttonName}</span> <span>→</span>
+                           <span>{card.buttonName}</span>
+                           {priceActiveId === card.id ? (
+                              <LoaderIcon className={clsx(isFeatured && css.cta_white)} />
+                           ) : (
+                              <span>→</span>
+                           )}
                         </Button>
                      </div>
 
                      <div className={css.card_bottom}>
                         <ul className={css.benefits}>
-                           {card.benefits.map((b, i) => (
+                           {card.advantages.map((b, i) => (
                               <li key={i} className={css.benefit}>
                                  <span
                                     className={clsx(css.benefit_icon, {
-                                       [css.active]: b.active,
+                                       [css.active]: b.isInclude,
                                     })}
                                  >
-                                    {b.active ? (
+                                    {b.isInclude ? (
                                        <svg
                                           xmlns="http://www.w3.org/2000/svg"
                                           width="24"
@@ -250,11 +199,11 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
 
                                  <H4
                                     className={clsx(css.benefit_text, {
-                                       [css.inactive]: !b.active,
-                                       [css.strong]: b.strong,
+                                       [css.inactive]: !b.isInclude,
+                                       // [css.strong]: b.strong,
                                     })}
                                  >
-                                    {b.text}
+                                    {b.value}
                                  </H4>
                               </li>
                            ))}

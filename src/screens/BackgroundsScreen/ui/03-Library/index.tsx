@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import qs from "qs";
 
+import { useAuth } from "features/Auth";
+import { isGrowAccess, isPremiumAccess } from "features/Auth/lib/access";
 import { Filter } from "features/Filter";
 import { PostItem, useBackgroundPosts } from "features/Post";
 
@@ -17,6 +19,8 @@ interface Prop {
 }
 
 export const Library: React.FC<Prop> = ({ clasName }) => {
+   const { data: authData } = useAuth();
+
    const libRef = React.useRef<HTMLDivElement>(null);
 
    const searchParams = useSearchParams();
@@ -92,7 +96,13 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
          <div className={clsx(css.library, clasName)} ref={libRef}>
             <div className={css.library_list}>
                {(postData.data?.docs || []).map((post) => (
-                  <PostItem data={post} key={post.id} />
+                  <PostItem
+                     data={post}
+                     isPromptAccess={
+                        isGrowAccess(authData?.plan) || isPremiumAccess(authData?.plan)
+                     }
+                     key={post.id}
+                  />
                ))}
             </div>
 

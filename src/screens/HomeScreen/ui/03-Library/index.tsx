@@ -7,6 +7,8 @@ import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import qs from "qs";
 
+import { useAuth } from "features/Auth";
+import { isSubscribedAccess } from "features/Auth/lib/access";
 import { Filter } from "features/Filter";
 import { PostItem, PostLeaveEmail } from "features/Post";
 import { usePosts } from "features/Post/model/usePosts";
@@ -18,6 +20,8 @@ interface Prop {
 }
 
 export const Library: React.FC<Prop> = ({ clasName }) => {
+   const { data: authData } = useAuth();
+
    const libRef = React.useRef<HTMLDivElement>(null);
    const [saveEmail, setSaveEmail] = React.useState({
       active: false,
@@ -101,7 +105,12 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
          <div className={clsx(css.library, clasName)} ref={libRef}>
             <div className={css.library_list}>
                {(postData.data?.docs || []).map((post) => (
-                  <PostItem data={post} onSaveEmail={handleSaveEmail} key={post.id} />
+                  <PostItem
+                     data={post}
+                     onSaveEmail={handleSaveEmail}
+                     isPromptAccess={isSubscribedAccess(authData?.plan)}
+                     key={post.id}
+                  />
                ))}
             </div>
 

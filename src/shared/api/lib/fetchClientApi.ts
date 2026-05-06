@@ -2,37 +2,44 @@
 
 import axios from "axios";
 
+import { getAccessToken } from "features/Auth";
+
 import { getApiUrl } from "./getApiUrl";
 
 export interface FetchApiOptions {
-  drafts?: boolean;
-  locale?: string;
-  query?: Record<any, any>;
-  params?: Record<string, any>;
+   drafts?: boolean;
+   locale?: string;
+   query?: Record<any, any>;
+   params?: Record<string, any>;
 }
 
-export async function fetchClientApi<T = unknown>(
-  url: string,
-  options: FetchApiOptions = {}
-) {
-  const locale = options.locale ?? undefined;
+export async function fetchClientApi<T = unknown>(url: string, options: FetchApiOptions = {}) {
+   const locale = options.locale ?? undefined;
 
-  let newUrl = url;
+   let newUrl = url;
 
-  // Replace url with params
-  for (const [key, value] of Object.entries(options.params || {})) {
-    newUrl = newUrl.replaceAll(`:${key}`, value);
-  }
+   // Replace url with params
+   for (const [key, value] of Object.entries(options.params || {})) {
+      newUrl = newUrl.replaceAll(`:${key}`, value);
+   }
 
-  // Generate endpoint
-  const endpoint = getApiUrl(newUrl, {
-    draft: options.drafts ?? false,
-    locale,
-    ...(options.query || {}),
-  });
+   // Generate endpoint
+   const endpoint = getApiUrl(newUrl, {
+      draft: options.drafts ?? false,
+      locale,
+      ...(options.query || {}),
+   });
 
-  // Fetch data
-  const response = await axios.get(endpoint);
+   // Fetch data
+   const accessToken = getAccessToken();
 
-  return response.data as T;
+   const response = await axios.get(endpoint, {
+      headers: accessToken
+         ? {
+              Authorization: `Bearer ${accessToken}`,
+           }
+         : undefined,
+   });
+
+   return response.data as T;
 }

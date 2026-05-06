@@ -3,28 +3,37 @@ import React from "react";
 import { Post } from "../../api/posts.types";
 import clsx from "clsx";
 
+import { useAuth } from "features/Auth";
+
 import { fileToServerPath } from "shared/api/lib/fileToServerPath";
 import { ImageApi } from "shared/api/ui/ImageApi";
 import { NextLink } from "shared/ui/base/NextLink";
-import { Button } from "shared/ui/ui-kit/Button";
 import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
-import { LinkButton } from "shared/ui/ui-kit/LinkButton";
 import { H4, H5, P } from "shared/ui/ui-kit/Text";
 
 import css from "./PostItem.module.scss";
 
 interface Props {
    data: Post;
+   isPromptAccess?: boolean;
    onSaveEmail?(postId: string): void;
 }
 
 export const PostItem: React.FC<Props> = (props) => {
-   const { data, onSaveEmail } = props;
+   const { data, onSaveEmail, isPromptAccess } = props;
    const [showAllTags, setShowAllTags] = React.useState(false);
 
    const contentType = React.useMemo(() => {
       return data.preview.mimeType.split("/")[0] as "image" | "video";
    }, [data.preview]);
+
+   const isLockedPrompt = React.useMemo(() => {
+      if (data.plan === "premium" && !isPromptAccess) {
+         return true;
+      }
+
+      return false;
+   }, [isPromptAccess, data]);
 
    return (
       <article className={clsx(css.thumbnail, css.thumbnail_grid)}>
@@ -45,7 +54,7 @@ export const PostItem: React.FC<Props> = (props) => {
             )}
 
             <div className={css.thumbnail_controls}>
-               {(data.plan === "free" || data.plan === "coming-soon") && (
+               {!isLockedPrompt && (
                   <CopyPrompt
                      prompt={data.prompt}
                      onSave={
@@ -56,7 +65,10 @@ export const PostItem: React.FC<Props> = (props) => {
                   </CopyPrompt>
                )}
                {data.plan === "premium" && (
-                  <a href="/pricing" className={css.thumbnail_premium}>
+                  <a
+                     href={isLockedPrompt ? "/pricing" : undefined}
+                     className={css.thumbnail_premium}
+                  >
                      <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"

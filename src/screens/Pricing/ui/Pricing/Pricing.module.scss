@@ -64,7 +64,7 @@
       padding: 12px;
 
       span {
-         border-color: #FFF;
+         border-color: #fff;
       }
    }
 }
@@ -151,6 +151,10 @@
    border-radius: 10rem;
 
    font-size: 2rem;
+
+   &_white {
+      border-color: white;
+   }
 }
 
 .cta span:first-child {

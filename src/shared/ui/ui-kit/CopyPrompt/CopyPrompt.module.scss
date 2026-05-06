@@ -1,6 +1,10 @@
 .link_button {
    @include flexCenter();
 
+   &:disabled &_icon {
+      cursor: not-allowed;
+   }
+
    &_icon {
       align-items: center;
       background-color: hsla(0, 0%, 55%, 0.3);
@@ -24,9 +28,9 @@
          height: 1.6rem;
          transform: translateY(-0.1em);
       }
+   }
 
-      &:hover {
-         background-color: #5b5b5b;
-      }
+   &:not(:disabled) .link_button_icon:hover {
+      background-color: #5b5b5b;
    }
 }

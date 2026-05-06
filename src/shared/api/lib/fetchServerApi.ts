@@ -1,3 +1,5 @@
+import { getServerAccessToken } from "features/Auth/lib/getServerAccessToken";
+
 import { config } from "../config";
 import { getApiUrl } from "./getApiUrl";
 import { getLocale } from "./getLocale";
@@ -28,9 +30,16 @@ export async function fetchServerApi<T = unknown>(url: string, options: FetchApi
       ...(options.query || {}),
    });
 
+   const accessToken = await getServerAccessToken();
+
    // Fetch data
    const response = await fetch(endpoint, {
       cache: options.noCache ? "no-store" : undefined,
+      headers: accessToken
+         ? {
+              Authorization: `Bearer ${accessToken}`,
+           }
+         : undefined,
       next: !options.noCache
          ? {
               revalidate: config.revalidateMs,
