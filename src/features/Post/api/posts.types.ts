@@ -13,6 +13,7 @@ export interface Post {
    prompt?: string;
    category?: Category;
    aiTool: AiTool[];
+   file?: ImageType;
    createdBy: Profile | null;
 }
 

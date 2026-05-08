@@ -13,9 +13,10 @@ interface Prop {
    prompt?: string;
    children?: React.ReactNode;
    onSave?: VoidFunction;
+   onClick?: VoidFunction
 }
 
-export const CopyPrompt: React.FC<Prop> = ({ className, prompt, onSave }) => {
+export const CopyPrompt: React.FC<Prop> = ({ className, prompt, onSave, onClick }) => {
    const timeoutRef = React.useRef<NodeJS.Timeout | null>(null);
    const [isCopied, setCopied] = React.useState(false);
 
@@ -28,6 +29,8 @@ export const CopyPrompt: React.FC<Prop> = ({ className, prompt, onSave }) => {
       copyInput(prompt);
 
       setCopied(true);
+
+      onClick?.();
 
       timeoutRef.current = setTimeout(() => {
          setCopied(false);

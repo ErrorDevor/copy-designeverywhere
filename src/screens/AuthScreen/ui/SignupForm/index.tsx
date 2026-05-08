@@ -9,6 +9,8 @@ import * as yup from "yup";
 
 import { setAccessToken, useAuth } from "features/Auth";
 import { authApi } from "features/Auth/api/authApi";
+import { useAuthPaymentSession } from "features/Auth/model/useAuthPaymentSession";
+import { usePlanBySubscriptionId } from "features/Pricing";
 
 import { Button } from "shared/ui/ui-kit/Button";
 import { Input } from "shared/ui/ui-kit/Input";
@@ -16,7 +18,10 @@ import { Input } from "shared/ui/ui-kit/Input";
 import css from "./SignupForm.module.scss";
 
 export const SignupForm: React.FC = () => {
+   const paymentSession = useAuthPaymentSession();
+   const plan = usePlanBySubscriptionId(paymentSession?.subscriptionId);
    const router = useRouter();
+   const [registered, setRegistered] = React.useState(false);
 
    const [error, setError] = React.useState<string | null>(null);
    const auth = useAuth();
@@ -41,12 +46,17 @@ export const SignupForm: React.FC = () => {
             const response = await authApi.signup({
                email: values.email,
                password: values.password,
+               sessionId: paymentSession?.sessionId,
             });
 
             if (response.token && response.user) {
                auth.softLogin(response.user);
                setAccessToken(response.token);
-               router.push("/");
+               if (!paymentSession) {
+                  router.push("/");
+               } else {
+                  setRegistered(true);
+               }
             }
          } catch (error: any) {
             const errs = error?.response?.data?.errors?.[0];
@@ -62,8 +72,73 @@ export const SignupForm: React.FC = () => {
       },
    });
 
+   if (registered) {
+      return (
+         <div className={`${css.payment} ${css.registerCompleted}`}>
+            <svg
+               className={css.payment_icon}
+               viewBox="0 0 512 512"
+               fill="none"
+               xmlns="http://www.w3.org/2000/svg"
+            >
+               <g clipPath="url(#clip0_2028_9171)">
+                  <path
+                     d="M256 512C397.385 512 512 397.385 512 256C512 114.615 397.385 0 256 0C114.615 0 0 114.615 0 256C0 397.385 114.615 512 256 512Z"
+                     fill="#39B54A"
+                  />
+                  <path
+                     d="M214.8 365.2L114 265.6L150.4 228.4L214.8 292L361.6 146.8L398 183.6L214.8 365.2Z"
+                     fill="white"
+                  />
+               </g>
+               <defs>
+                  <clipPath id="clip0_2028_9171">
+                     <rect width="512" height="512" fill="white" />
+                  </clipPath>
+               </defs>
+            </svg>
+            <p className={css.payment_title}>Thank You for Your Purchase!</p>
+            <p className={css.payment_text}>
+               Your {plan?.planType} {plan?.mode === "payment" ? "lifetime" : "monthly"} plan is
+               active and all paid prompt are now unlocked
+            </p>
+            <Button className={css.payment_button} variant="black" href="/" as="a">
+               Explore Prompts →
+            </Button>
+         </div>
+      );
+   }
+
    return (
       <FormikProvider value={formik}>
+         {paymentSession && (
+            <div className={css.payment}>
+               <svg
+                  className={css.payment_icon}
+                  viewBox="0 0 512 512"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+               >
+                  <g clipPath="url(#clip0_2028_9171)">
+                     <path
+                        d="M256 512C397.385 512 512 397.385 512 256C512 114.615 397.385 0 256 0C114.615 0 0 114.615 0 256C0 397.385 114.615 512 256 512Z"
+                        fill="#39B54A"
+                     />
+                     <path
+                        d="M214.8 365.2L114 265.6L150.4 228.4L214.8 292L361.6 146.8L398 183.6L214.8 365.2Z"
+                        fill="white"
+                     />
+                  </g>
+                  <defs>
+                     <clipPath id="clip0_2028_9171">
+                        <rect width="512" height="512" fill="white" />
+                     </clipPath>
+                  </defs>
+               </svg>
+               <p className={css.payment_title}>Payment successful</p>
+               <p className={css.payment_text}>Please create an account to activate your access</p>
+            </div>
+         )}
          <form onSubmit={formik.handleSubmit} className={css.form}>
             <Input name="email" label="Email*" placeholder="Enter email" />
             <Input name="password" label="Password*" placeholder="Enter password" type="password" />

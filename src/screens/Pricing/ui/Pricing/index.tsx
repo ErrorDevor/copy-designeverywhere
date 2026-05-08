@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
 import { useAuth } from "features/Auth";
-import { usePricings } from "features/Pricing";
+import { useMySubscription, usePricings } from "features/Pricing";
 import { Pricing as PricingType } from "features/Pricing/api/pricing.types";
 import { subscriptionApi } from "features/Pricing/api/subscriptionApi";
 
@@ -26,6 +26,7 @@ type Period = "monthly" | "lifetime";
 
 export const Pricing: React.FC<Prop> = ({ className }) => {
    const [period, setPeriod] = React.useState<Period>("monthly");
+   const mySubscription = useMySubscription();
    const { data } = useAuth();
    const router = useRouter();
 
@@ -42,7 +43,7 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
    };
 
    const handleSubscribe = async (pricing: PricingType) => {
-      if (priceActiveId) {
+      if (priceActiveId || mySubscription.plan?.id === pricing.id) {
          return;
       }
 
@@ -144,10 +145,13 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
 
                         <Button
                            className={css.cta}
+                           disabled={mySubscription.plan?.id === card.id || (mySubscription.plan?.priority || 0) > card.priority}
                            variant={isFeatured ? "black" : "light"}
                            onClick={handleSubscribe.bind(null, card)}
                         >
-                           <span>{card.buttonName}</span>
+                           <span>
+                              {mySubscription.plan?.id === card.id ? "Current" : card.buttonName}
+                           </span>
                            {priceActiveId === card.id ? (
                               <LoaderIcon className={clsx(isFeatured && css.cta_white)} />
                            ) : (

@@ -16,4 +16,5 @@ export interface AuthLoginDTO {
 export interface AuthLoginDataDTO {
    email: string;
    password: string;
+   sessionId?: string
 }

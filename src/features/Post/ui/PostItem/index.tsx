@@ -7,6 +7,7 @@ import { useAuth } from "features/Auth";
 
 import { fileToServerPath } from "shared/api/lib/fileToServerPath";
 import { ImageApi } from "shared/api/ui/ImageApi";
+import { downloadFile } from "shared/lib/downloadFile";
 import { NextLink } from "shared/ui/base/NextLink";
 import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
 import { H4, H5, P } from "shared/ui/ui-kit/Text";
@@ -60,6 +61,7 @@ export const PostItem: React.FC<Props> = (props) => {
                      onSave={
                         data.plan === "coming-soon" ? onSaveEmail?.bind(null, data.id) : undefined
                      }
+                     onClick={() => data.file && downloadFile(fileToServerPath(data.file).main)}
                   >
                      Copy Prompt
                   </CopyPrompt>
