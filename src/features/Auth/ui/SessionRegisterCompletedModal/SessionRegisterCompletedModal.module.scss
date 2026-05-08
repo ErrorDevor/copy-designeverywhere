@@ -1,0 +1,39 @@
+.modal {
+   margin: auto;
+   padding: 3.2rem 1.6rem 2.4rem;
+   max-width: 40rem;
+   width: 100%;
+   background: #fff;
+   border-radius: 2.4rem;
+
+   display: flex;
+   flex-direction: column;
+   align-items: center;
+}
+.modal_title {
+   text-align: center;
+   @include fontABCDiatype(1.8rem, 1, -0.015em, 400, rgb(13, 13, 13));
+
+   display: flex;
+   align-items: center;
+   gap: 0.6rem;
+
+   svg {
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      fill: #000;
+   }
+}
+.modal_text {
+   max-width: 28rem;
+   text-align: center;
+   margin-top: 1rem;
+   @include fontABCDiatype(1.4rem, 1, -0.015em, 400, #8e8e8e);
+}
+
+.modal_btn {
+   margin-top: 2rem;
+   font-size: 1.4rem;
+   padding: 0.8rem 1.6rem;
+}

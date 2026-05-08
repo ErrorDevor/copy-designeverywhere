@@ -109,6 +109,7 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
                      data={post}
                      onSaveEmail={handleSaveEmail}
                      isPromptAccess={isSubscribedAccess(authData?.plan)}
+                     isAuthenticated={!!authData}
                      key={post.id}
                   />
                ))}

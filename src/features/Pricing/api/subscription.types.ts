@@ -10,6 +10,7 @@ export interface SessionWaitRegister {
    sessionId: string;
    customerId: string;
    subscriptionId: string;
+   activated: boolean;
    email?: string;
    createdAt: string;
    updatedAt: string;

@@ -5,6 +5,8 @@ import { getQueryClient } from "app/providers/ReactQueryProvider/getQueryClient"
 
 import { pricingApi } from "features/Pricing/api/pricingApi";
 
+import { fetchServerApi } from "shared/api/lib/fetchServerApi";
+
 export const dynamic = "force-dynamic";
 
 export default async function Pricing() {
@@ -16,6 +18,16 @@ export default async function Pricing() {
          pricingApi.pricingList({
             search: { limit: 100, sort: "price" },
          }),
+   });
+
+   const pagePricing = await fetchServerApi("/globals/page-pricing", {
+      noCache: true,
+   });
+
+   queryClient.prefetchQuery({
+      queryKey: ["pricing-page"],
+      queryFn: () => pagePricing,
+      initialData: pagePricing,
    });
 
    try {

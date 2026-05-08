@@ -1,0 +1,28 @@
+.premium {
+   align-items: center;
+   background-color: hsla(0, 0%, 55%, 0.3);
+   backdrop-filter: blur(6px);
+   border-radius: 5px;
+   cursor: pointer;
+   display: flex;
+   align-items: center;
+   gap: 0.4rem;
+   height: 28px;
+   padding: 0 6px;
+   justify-content: center;
+   transition: background-color 0.2s ease-in-out;
+
+   @include fontABCDiatype(14px, 1.25, normal, 500, #fff);
+   letter-spacing: -0.02em;
+
+   svg {
+      stroke: #fff;
+      width: 1.6rem;
+      height: 1.6rem;
+      transform: translateY(-0.15rem);
+   }
+
+   &:hover {
+      background-color: #5b5b5b;
+   }
+}

@@ -112,12 +112,19 @@
 
 .question_answer {
    overflow: hidden;
-   p {
-      margin: 0 0 16px;
-   }
+
+   @include fontABCDiatype(1.8rem, 1.15, 0, 400);
 
    ol {
       list-style: decimal;
+   }
+
+   ul {
+      list-style: disc;
+   }
+
+   ol,
+   ul {
       list-style-position: outside;
       padding-left: 3.6rem;
       margin: 0;
@@ -155,7 +162,8 @@
    }
 
    .question_answer {
-      ol {
+      ol,
+      ul {
          font-size: 1.4rem;
       }
    }

@@ -3,6 +3,7 @@ import "shared/styles/index.scss";
 
 import { Metadata } from "next";
 import localFont from "next/font/local";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
 
@@ -44,8 +45,12 @@ export default function RootLayout({
 }: Readonly<{
    children: React.ReactNode;
 }>) {
+   console.log(process.env.NODE_ENV)
    return (
       <html lang="en" className={`${abcdiatype.variable} ${monumentMono.variable}`}>
+         {process.env.NODE_ENV === 'production' && (
+            <GoogleAnalytics gaId="G-LF80ZYNHJL" />
+         )}
          <body>
             <ReactQueryProvider>
                <AuthProvider>

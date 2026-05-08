@@ -1,3 +1,5 @@
+import { SerializedEditorState } from "lexical";
+
 export type SearchQuery = Record<string, any> | string | undefined;
 
 export interface PageWithSearchParams {
@@ -38,3 +40,9 @@ export type ImageType = {
    };
    thumbnailURL: string | null;
 };
+
+export interface FaqItem {
+   id: string;
+   question: string;
+   answer: SerializedEditorState;
+}

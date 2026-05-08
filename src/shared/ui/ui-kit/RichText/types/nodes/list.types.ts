@@ -1,0 +1,23 @@
+"use client";
+
+import type {
+  SerializedListItemNode as _SerializedListItemNode,
+  SerializedListNode as _SerializedListNode,
+} from "@lexical/list";
+import type { Spread } from "lexical";
+
+export type SerializedListItemNode = Spread<
+  {
+    checked?: boolean;
+    type: "listitem";
+  },
+  _SerializedListItemNode
+>;
+
+export type SerializedListNode = Spread<
+  {
+    checked?: boolean;
+    type: "list";
+  },
+  _SerializedListNode
+>;

@@ -13,15 +13,17 @@ import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
 import { H4, H5, P } from "shared/ui/ui-kit/Text";
 
 import css from "./PostItem.module.scss";
+import { PremiumButton } from "shared/ui/ui-kit/PremiumButton";
 
 interface Props {
    data: Post;
    isPromptAccess?: boolean;
+   isAuthenticated?: boolean;
    onSaveEmail?(postId: string): void;
 }
 
 export const PostItem: React.FC<Props> = (props) => {
-   const { data, onSaveEmail, isPromptAccess } = props;
+   const { data, onSaveEmail, isPromptAccess, isAuthenticated } = props;
    const [showAllTags, setShowAllTags] = React.useState(false);
 
    const contentType = React.useMemo(() => {
@@ -29,7 +31,7 @@ export const PostItem: React.FC<Props> = (props) => {
    }, [data.preview]);
 
    const isLockedPrompt = React.useMemo(() => {
-      if (data.plan === "premium" && !isPromptAccess) {
+      if (data.plan === "premium" && !isPromptAccess || data.plan === "coming-soon") {
          return true;
       }
 
@@ -67,25 +69,13 @@ export const PostItem: React.FC<Props> = (props) => {
                   </CopyPrompt>
                )}
                {data.plan === "premium" && (
-                  <a
-                     href={isLockedPrompt ? "/pricing" : undefined}
-                     className={css.thumbnail_premium}
-                  >
-                     <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                     >
-                        <rect width="18" height="11" x="3" y="11" rx="2" ry="2"></rect>
-                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
-                     </svg>
-                     Premium
-                  </a>
+                  <PremiumButton href={isLockedPrompt ? "/pricing" : undefined} />
                )}
-               {data.plan === "coming-soon" && <p className={css.comingSoon}>Coming Soon</p>}
+               {data.plan === "coming-soon" && (
+                  <>
+                     {isAuthenticated ? <p className={css.comingSoon}>Coming Soon</p> : <PremiumButton href="/pricing" />}
+                  </>
+               )}
             </div>
          </div>
 

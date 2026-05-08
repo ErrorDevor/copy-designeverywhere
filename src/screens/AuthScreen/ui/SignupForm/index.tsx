@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 import { FormikProvider, useFormik } from "formik";
 import * as yup from "yup";
 
-import { setAccessToken, useAuth } from "features/Auth";
+import { SessionRegisterCompletedModal, setAccessToken, useAuth } from "features/Auth";
 import { authApi } from "features/Auth/api/authApi";
 import { useAuthPaymentSession } from "features/Auth/model/useAuthPaymentSession";
 import { usePlanBySubscriptionId } from "features/Pricing";
@@ -22,6 +22,7 @@ export const SignupForm: React.FC = () => {
    const plan = usePlanBySubscriptionId(paymentSession?.subscriptionId);
    const router = useRouter();
    const [registered, setRegistered] = React.useState(false);
+   const [activeModal, setActiveModal] = React.useState(false);
 
    const [error, setError] = React.useState<string | null>(null);
    const auth = useAuth();
@@ -71,6 +72,16 @@ export const SignupForm: React.FC = () => {
          }
       },
    });
+
+   React.useEffect(() => {
+      if (paymentSession?.activated) {
+         const timeout = setTimeout(() => {
+            setActiveModal(true);
+         }, 250);
+
+         return () => clearTimeout(timeout);
+      }
+   }, []);
 
    if (registered) {
       return (
@@ -140,13 +151,25 @@ export const SignupForm: React.FC = () => {
             </div>
          )}
          <form onSubmit={formik.handleSubmit} className={css.form}>
-            <Input name="email" label="Email*" placeholder="Enter email" />
-            <Input name="password" label="Password*" placeholder="Enter password" type="password" />
+            <Input
+               name="email"
+               label="Email*"
+               placeholder="Enter email"
+               disabled={paymentSession?.activated}
+            />
+            <Input
+               name="password"
+               label="Password*"
+               placeholder="Enter password"
+               type="password"
+               disabled={paymentSession?.activated}
+            />
             <Input
                name="confirmPassword"
                label="Confirm password*"
                placeholder="Confirm password"
                type="password"
+               disabled={paymentSession?.activated}
             />
             {error && <p className={css.error}>{error}</p>}
             <Button
@@ -174,6 +197,9 @@ export const SignupForm: React.FC = () => {
                .
             </p>
          </form>
+         {paymentSession && (
+            <SessionRegisterCompletedModal active={activeModal} onClose={() => null} />
+         )}
       </FormikProvider>
    );
 };
