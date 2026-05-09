@@ -10,15 +10,24 @@ interface Prop {
   className?: string;
 }
 
-const marqueeItems = [
+interface Item {
+  type: string;
+  value?: string;
+  alt?: string;
+  src?: string;
+  style?: React.CSSProperties;
+}
+
+const marqueeItems: Array<Item> = [
   {
     type: "text",
     value: "BECOME A MEMBER",
   },
   {
     type: "image",
-    src: "/images/2dac58.webp",
+    src: "/images/pricing-tag.png",
     alt: "Design Everywhere",
+    style: { transform: "rotate(30deg)" }
   },
   {
     type: "text",
@@ -26,7 +35,7 @@ const marqueeItems = [
   },
   {
     type: "image",
-    src: "/images/abaac4.webp",
+    src: "/images/pricing-tag.png",
     alt: "Design Everywhere",
   },
 ] as const;
@@ -56,6 +65,7 @@ export const Marquee: React.FC<Prop> = ({ className }) => {
                     width={600}
                     height={600}
                     alt={item.alt}
+                    style={item.style}
                     sizes="(max-width: 340px) 65px, (max-width: 640px) 60px, (max-width: 768px) 72px, (max-width: 1024px) 64px, (max-width: 1280px) 80px, (max-width: 1536px) 97px, 109px"
                   />
                 </div>

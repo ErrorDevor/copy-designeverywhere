@@ -1,19 +1,19 @@
 import { Profile } from "features/Profile";
 
-import { ImageType, PayloadPagination } from "shared/api/types";
+import { FileType, PayloadPagination } from "shared/api/types";
 
 export interface Post {
    id: string;
    title: string;
    slug: string;
    sectionType?: string;
-   preview: ImageType;
-   tagsList: Array<PostTag>;
+   preview: FileType;
+   tagsList?: Array<PostTag>;
    plan: "premium" | "free" | "coming-soon";
    prompt?: string;
    category?: Category;
    aiTool: AiTool[];
-   file?: ImageType;
+   file?: FileType;
    createdBy: Profile | null;
 }
 

@@ -4,10 +4,10 @@ import React from "react";
 
 import { fileToServerPath } from "../lib/fileToServerPath";
 
-import { ImageType } from "../types";
+import { FileType } from "../types";
 
 interface Props {
-   data: ImageType;
+   data: FileType;
    className?: string;
 }
 

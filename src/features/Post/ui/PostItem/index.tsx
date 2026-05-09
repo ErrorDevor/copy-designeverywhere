@@ -10,10 +10,11 @@ import { ImageApi } from "shared/api/ui/ImageApi";
 import { downloadFile } from "shared/lib/downloadFile";
 import { NextLink } from "shared/ui/base/NextLink";
 import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
+import { MediaPlayer } from "shared/ui/ui-kit/MediaPlayer";
+import { PremiumButton } from "shared/ui/ui-kit/PremiumButton";
 import { H4, H5, P } from "shared/ui/ui-kit/Text";
 
 import css from "./PostItem.module.scss";
-import { PremiumButton } from "shared/ui/ui-kit/PremiumButton";
 
 interface Props {
    data: Post;
@@ -31,7 +32,7 @@ export const PostItem: React.FC<Props> = (props) => {
    }, [data.preview]);
 
    const isLockedPrompt = React.useMemo(() => {
-      if (data.plan === "premium" && !isPromptAccess || data.plan === "coming-soon") {
+      if ((data.plan === "premium" && !isPromptAccess) || data.plan === "coming-soon") {
          return true;
       }
 
@@ -41,20 +42,7 @@ export const PostItem: React.FC<Props> = (props) => {
    return (
       <article className={clsx(css.thumbnail, css.thumbnail_grid)}>
          <div className={css.thumbnail_image}>
-            {contentType === "image" && (
-               <ImageApi className={css.thumbnail_picture} data={data.preview} />
-            )}
-            {contentType === "video" && (
-               <video
-                  src={fileToServerPath(data.preview).main}
-                  className={css.thumbnail_video}
-                  loop
-                  autoPlay
-                  playsInline
-                  muted
-                  preload="metadata"
-               />
-            )}
+            <MediaPlayer data={data.preview} />
 
             <div className={css.thumbnail_controls}>
                {!isLockedPrompt && (
@@ -73,7 +61,11 @@ export const PostItem: React.FC<Props> = (props) => {
                )}
                {data.plan === "coming-soon" && (
                   <>
-                     {isAuthenticated ? <p className={css.comingSoon}>Coming Soon</p> : <PremiumButton href="/pricing" />}
+                     {isAuthenticated ? (
+                        <p className={css.comingSoon}>Coming Soon</p>
+                     ) : (
+                        <PremiumButton href="/pricing" />
+                     )}
                   </>
                )}
             </div>
@@ -112,13 +104,13 @@ export const PostItem: React.FC<Props> = (props) => {
 
          <div className={css.thumbnail_tags}>
             <ul className={css.thumbnail_tags_wrapper}>
-               {data.tagsList.slice(0, showAllTags ? 999 : 4).map((tag) => (
+               {(data.tagsList || []).slice(0, showAllTags ? 999 : 4).map((tag) => (
                   <li key={tag.id} className={css.thumbnail_tags_item}>
                      <P>{tag.value}</P>
                   </li>
                ))}
 
-               {!showAllTags && data.tagsList.length > 4 && (
+               {!showAllTags && (data.tagsList?.length || 0) > 4 && (
                   <button className={css.more_button} onClick={() => setShowAllTags(true)}>
                      ...
                   </button>

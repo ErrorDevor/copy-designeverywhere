@@ -1,4 +1,4 @@
-import { FaqItem, ImageType, PayloadPagination } from "shared/api/types";
+import { FaqItem, FileType, PayloadPagination } from "shared/api/types";
 
 export interface PricingPage {
    pricings: Array<{
@@ -15,7 +15,7 @@ export interface Pricing {
    planType: PricingType;
    stripePriceId: string;
    mode: "subscription" | "payment";
-   preview: ImageType;
+   preview: FileType;
    title: string;
    price: number;
    oldPrice?: number;

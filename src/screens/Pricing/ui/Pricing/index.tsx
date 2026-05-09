@@ -1,14 +1,16 @@
 "use client";
-
 import React from "react";
 
 import clsx from "clsx";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useMySubscription, usePricingPage } from "features/Pricing";
 import { Pricing as PricingType } from "features/Pricing/api/pricing.types";
 import { subscriptionApi } from "features/Pricing/api/subscriptionApi";
 
 import { ImageApi } from "shared/api/ui/ImageApi";
+import { useSwiperHelper } from "shared/lib/hooks/useSwiperHelper";
 import { Button } from "shared/ui/ui-kit/Button";
 import { LoaderIcon } from "shared/ui/ui-kit/LoaderIcon";
 import { H2, H3, H4, H5, P } from "shared/ui/ui-kit/Text";
@@ -184,6 +186,7 @@ const PricingGroup = ({ data, index }: { data: PricingType[]; index: number }) =
 
 export const Pricing: React.FC<Prop> = ({ className }) => {
    const { pricings } = usePricingPage();
+   const swiper = useSwiperHelper();
 
    return (
       <section className={clsx(css.pricing, className)}>
@@ -205,35 +208,42 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
          </div>
 
          {/* Toggle */}
-         {/* <div className={css.toggle}>
-            {pricings.subscriptions.length > 0 && (
+         <div className={css.pricing_head}>
+            <h2 className={css.pricing_title}>Pricing</h2>
+            <div className={css.pricing_controls}>
                <button
-                  className={clsx(css.toggle_btn, {
-                     [css.active]: period === "monthly",
-                  })}
-                  onClick={() => setPeriod("monthly")}
+                  className={css.pricing_controls_btn}
+                  onClick={swiper.slidePrev}
+                  disabled={swiper.isBeginning}
                >
-                  Monthly
+                  ←
                </button>
-            )}
-
-            {pricings.payments.length > 0 && (
                <button
-                  className={clsx(css.toggle_btn, {
-                     [css.active]: period === "lifetime",
-                  })}
-                  onClick={() => setPeriod("lifetime")}
+                  className={css.pricing_controls_btn}
+                  onClick={swiper.slideNext}
+                  disabled={swiper.isEnd}
                >
-                  Lifetime <span>Best Value</span>
+                  →
                </button>
-            )}
-         </div> */}
+            </div>
+         </div>
 
          {/* Cards */}
-         <div className={css.cards}>
-            {pricings.map((item, index) => (
-               <PricingGroup data={item.data} index={index} key={item.id} />
-            ))}
+         <div className={css.cards_swiper}>
+            <Swiper
+               className={css.cards_swiper_instance}
+               onInit={swiper.setSwiperCore}
+               onSlideChange={swiper.updater}
+               spaceBetween={16}
+               slidesPerView="auto"
+               grabCursor
+            >
+               {pricings.map((item, index) => (
+                  <SwiperSlide className={css.cards_swiper_item} key={item.id}>
+                     <PricingGroup data={item.data} index={index} />
+                  </SwiperSlide>
+               ))}
+            </Swiper>
          </div>
       </section>
    );

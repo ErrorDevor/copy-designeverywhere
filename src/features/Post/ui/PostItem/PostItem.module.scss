@@ -34,7 +34,10 @@
    &_image {
       display: flex;
       position: relative;
-      width: 100%;
+
+      &_container {
+         position: relative;
+      }
    }
 
    &_picture {

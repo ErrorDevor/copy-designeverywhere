@@ -1,8 +1,8 @@
-import { ImageType } from "shared/api/types";
+import { FileType } from "shared/api/types";
 
 export interface Profile {
    id: string;
-   avatar: ImageType | null;
+   avatar: FileType | null;
    name: string | null;
    email: string;
 }

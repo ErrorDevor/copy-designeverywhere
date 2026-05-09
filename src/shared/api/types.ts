@@ -18,7 +18,7 @@ export type PayloadPagination = {
    nextPage: number | null;
 };
 
-export type ImageType = {
+export type FileType = {
    id: string;
    createdAt: string;
    updatedAt: string;
@@ -38,7 +38,10 @@ export type ImageType = {
          filename: string | null;
       };
    };
-   thumbnailURL: string | null;
+   thumbnail?: {
+      url?: string;
+      name?: string;
+   };
 };
 
 export interface FaqItem {

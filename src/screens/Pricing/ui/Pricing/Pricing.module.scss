@@ -5,6 +5,7 @@
    padding: 0 1.8518518519vw 5rem;
    position: relative;
    width: 100%;
+   overflow: hidden;
 }
 
 .intro {
@@ -75,12 +76,24 @@
    gap: 24px;
 }
 
+.cards_swiper_instance {
+   overflow: visible !important;
+}
+
+.cards_swiper_item {
+   width: 60rem;
+   height: auto;
+   display: flex;
+   flex-direction: column;
+}
+
 .card {
    background-color: #fff;
    border-radius: 20px;
    display: flex;
    flex-direction: column;
    border: 1px solid transparent;
+   flex-grow: 1;
 }
 
 .featured {
@@ -104,7 +117,7 @@
    display: flex;
    flex-direction: column;
    gap: 16px;
-   padding: 16px 16px 20px;
+   padding: 16px 16px 36px;
 }
 
 .card_image {
@@ -139,7 +152,9 @@
       padding: 6px 8px;
       @include fontABCDiatype(1.3rem, 1.1, -0.02em, 400, rgb(13, 13, 13));
 
-      transition: background 120ms ease, color 120ms ease;
+      transition:
+         background 120ms ease,
+         color 120ms ease;
 
       &:disabled {
          background: rgba(13, 13, 13);
@@ -152,6 +167,10 @@
    display: flex;
    flex-direction: column;
    gap: 2rem;
+
+   > h2 {
+      min-height: 2.4em;
+   }
 }
 
 .price {
@@ -196,8 +215,10 @@
    background-color: #dedede;
    border-bottom-left-radius: 20px;
    border-bottom-right-radius: 20px;
-   margin-top: auto;
+   // margin-top: auto;
+   flex-grow: 1;
    padding: 14px;
+   padding-bottom: 28px;
 
    min-height: 30rem;
    display: flex;
@@ -249,6 +270,50 @@
    font-weight: 700;
 }
 
+.pricing_head {
+   margin-bottom: 1.6rem;
+   display: flex;
+   align-items: center;
+   justify-content: space-between;
+   gap: 2rem;
+}
+.pricing_title {
+   @include fontABCDiatype(4.8rem, 1.25, -0.03em, 400, rgba(13, 13, 13));
+
+   @media screen and (max-width: 656px) {
+      font-size: 3.2rem;
+   }
+}
+.pricing_controls {
+   display: flex;
+   align-items: center;
+   gap: 0.8rem;
+}
+.pricing_controls_btn {
+   padding-top: 0.15em;
+   width: 4rem;
+   height: 4rem;
+   border-radius: 50%;
+   @include fontABCDiatype(1.8rem, 0.7, -0.03em, 400, rgba(13, 13, 13));
+
+   border: 0.1rem solid rgba(13, 13, 13, 1);
+
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+   transition: color 125ms ease, background 125ms ease;
+
+   &:not(:disabled):hover {
+      background: rgba(13,13,13);
+      color: #FFF;
+   }
+
+   &:disabled {
+      opacity: 0.5;
+   }
+}
+
 @media screen and (max-width: 1180px) {
    .cards {
       grid-template-columns: 1fr 1fr;
@@ -258,6 +323,9 @@
 @media screen and (max-width: 820px) {
    .cards {
       grid-template-columns: 1fr;
+   }
+   .cards_swiper_item {
+      width: 50rem;
    }
 }
 
@@ -293,5 +361,14 @@
 
    .toggle {
       margin: 0 auto;
+   }
+}
+
+@media screen and (max-width: 656px) {
+   .cards_swiper_item {
+      width: 90vw;
+   }
+   .benefits {
+      gap: 4px;
    }
 }

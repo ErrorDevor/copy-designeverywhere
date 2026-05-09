@@ -1,7 +1,20 @@
 import { config } from "../config";
-import { ImageType } from "../types";
+import { FileType } from "../types";
 
-export function fileToServerPath(file: ImageType) {
+type BaseFile = {
+   filename: string;
+   sizes?: {
+      webp: {
+         url: string | null;
+         width: number;
+         height: number;
+         mimeType: string;
+         filename: string | null;
+      };
+   };
+};
+
+export function fileToServerPath<T extends BaseFile>(file: T) {
    const orig = config.fileUrl;
    const main = `${orig}/${file.filename}`;
    const webp = file.sizes?.webp?.filename ? `${orig}/${file.sizes.webp.filename}` : null;

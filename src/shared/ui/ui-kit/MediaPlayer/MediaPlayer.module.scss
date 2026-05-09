@@ -1,0 +1,46 @@
+.media {
+   width: 100%;
+}
+.media_aspect {
+   position: relative;
+}
+.media_block {
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+}
+.media_content {
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+}
+.media_preview {
+   position: absolute;
+   left: 0;
+   top: 0;
+   width: 100%;
+   height: 100%;
+   object-fit: cover;
+   object-position: center;
+
+   &.hidden {
+      opacity: 0;
+      // transition: opacity 0s ease 0.5s;
+   }
+}
+
+.media_loader_container {
+   position: absolute;
+   right: 1.2rem;
+   bottom: 1.2rem;
+}
+.media_loader {
+   display: block;
+   width: 2.4rem !important;
+   height: 2.4rem !important;
+   border-color: #464343 !important;
+   border-right-color: transparent !important;
+}
