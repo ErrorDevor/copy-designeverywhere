@@ -2,8 +2,6 @@
 import React from "react";
 
 import clsx from "clsx";
-import "swiper/css";
-import { Swiper, SwiperSlide } from "swiper/react";
 
 import { useMySubscription, usePricingPage } from "features/Pricing";
 import { Pricing as PricingType } from "features/Pricing/api/pricing.types";
@@ -58,7 +56,7 @@ const PricingGroup = ({ data, index }: { data: PricingType[]; index: number }) =
       >
          <div className={css.card_top}>
             <div className={css.card_image}>
-               <ImageApi data={currentItem.preview} />
+               <ImageApi className={css.card_image_img} data={currentItem.preview} />
                {data.length > 1 && (
                   <div className={css.card_switcher}>
                      {data.map((item) => (
@@ -210,7 +208,7 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
          {/* Toggle */}
          <div className={css.pricing_head}>
             <h2 className={css.pricing_title}>Pricing</h2>
-            <div className={css.pricing_controls}>
+            {/* <div className={css.pricing_controls}>
                <button
                   className={css.pricing_controls_btn}
                   onClick={swiper.slidePrev}
@@ -225,12 +223,15 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
                >
                   →
                </button>
-            </div>
+            </div> */}
          </div>
 
          {/* Cards */}
-         <div className={css.cards_swiper}>
-            <Swiper
+         <div className={css.cards}>
+            {pricings.map((item, index) => (
+               <PricingGroup data={item.data} index={index} key={item.id} />
+            ))}
+            {/* <Swiper
                className={css.cards_swiper_instance}
                onInit={swiper.setSwiperCore}
                onSlideChange={swiper.updater}
@@ -243,7 +244,7 @@ export const Pricing: React.FC<Prop> = ({ className }) => {
                      <PricingGroup data={item.data} index={index} />
                   </SwiperSlide>
                ))}
-            </Swiper>
+            </Swiper> */}
          </div>
       </section>
    );

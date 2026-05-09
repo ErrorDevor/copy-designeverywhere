@@ -72,8 +72,8 @@
 
 .cards {
    display: grid;
-   grid-template-columns: repeat(3, 1fr);
-   gap: 24px;
+   grid-template-columns: repeat(4, 1fr);
+   gap: 16px;
 }
 
 .cards_swiper_instance {
@@ -302,11 +302,13 @@
    justify-content: center;
    align-items: center;
 
-   transition: color 125ms ease, background 125ms ease;
+   transition:
+      color 125ms ease,
+      background 125ms ease;
 
    &:not(:disabled):hover {
-      background: rgba(13,13,13);
-      color: #FFF;
+      background: rgba(13, 13, 13);
+      color: #fff;
    }
 
    &:disabled {
@@ -314,7 +316,42 @@
    }
 }
 
-@media screen and (max-width: 1180px) {
+@media screen and (max-width: 1720px) {
+   .card_switcher {
+      right: 1.2rem;
+      top: 1.2rem;
+   }
+
+   .price_wrap {
+      > h2 {
+         font-size: 2.2rem;
+      }
+   }
+
+   .card_image {
+      height: 260px !important;
+   }
+
+   .card_image_img {
+      display: block;
+      height: 100% !important;
+      width: 100%;
+      object-fit: cover;
+   }
+
+   .benefits {
+      gap: 4px;
+      margin-top: 5px;
+   }
+
+   .benefit {
+      h4 {
+         font-size: 16px;
+      }
+   }
+}
+
+@media screen and (max-width: 1220px) {
    .cards {
       grid-template-columns: 1fr 1fr;
    }
