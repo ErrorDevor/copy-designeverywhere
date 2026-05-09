@@ -48,3 +48,8 @@ export interface Category {
 export interface CategoryList extends PayloadPagination {
    docs: Category[];
 }
+
+export interface GetPrompt {
+   file: FileType;
+   prompt: string;
+}

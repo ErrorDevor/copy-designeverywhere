@@ -8,7 +8,7 @@ import { useHome } from "features/Home";
 
 import { fileToServerPath } from "shared/api/lib/fileToServerPath";
 import { ImageApi } from "shared/api/ui/ImageApi";
-import { H4, P } from "shared/ui/ui-kit/Text";
+import { H4 } from "shared/ui/ui-kit/Text";
 
 import css from "./Trending.module.scss";
 
@@ -47,7 +47,9 @@ export const Trending: React.FC<Prop> = ({ clasName }) => {
                   <div className={css.related_thumbnail_title}>
                      <div className={css.number}>
                         {/* <span className={css.square_unicode}>■</span> */}
-                        {(item.aiTool || []).map((item) => <span key={item.id}>{item.name}</span>)}
+                        {(item.aiTool || []).map((item) => (
+                           <span key={item.id}>{item.name}</span>
+                        ))}
                      </div>
 
                      <div className={css.title_wrap}>

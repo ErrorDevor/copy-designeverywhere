@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import Cookies from "js-cookie";
 
 import { getAccessToken } from "features/Auth";
 
@@ -11,6 +12,7 @@ export interface FetchApiOptions {
    locale?: string;
    query?: Record<any, any>;
    params?: Record<string, any>;
+   method?: string;
 }
 
 export async function fetchClientApi<T = unknown>(url: string, options: FetchApiOptions = {}) {
@@ -34,11 +36,11 @@ export async function fetchClientApi<T = unknown>(url: string, options: FetchApi
    const accessToken = getAccessToken();
 
    const response = await axios.get(endpoint, {
-      headers: accessToken
-         ? {
-              Authorization: `Bearer ${accessToken}`,
-           }
-         : undefined,
+      method: options.method ?? "get",
+      headers: {
+         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+         "x-guest-id": Cookies.get("guest_id") || "",
+      },
    });
 
    return response.data as T;

@@ -1,13 +1,11 @@
 import React from "react";
 
+import { useRouter } from "next/navigation";
+
 import { Post } from "../../api/posts.types";
 import clsx from "clsx";
 
-import { useAuth } from "features/Auth";
-
-import { fileToServerPath } from "shared/api/lib/fileToServerPath";
 import { ImageApi } from "shared/api/ui/ImageApi";
-import { downloadFile } from "shared/lib/downloadFile";
 import { NextLink } from "shared/ui/base/NextLink";
 import { CopyPrompt } from "shared/ui/ui-kit/CopyPrompt";
 import { MediaPlayer } from "shared/ui/ui-kit/MediaPlayer";
@@ -20,16 +18,16 @@ interface Props {
    data: Post;
    isPromptAccess?: boolean;
    isAuthenticated?: boolean;
+   isAvailableCopy?: boolean;
    onSaveEmail?(postId: string): void;
+   onCopiedPrompt?: VoidFunction;
+   onOpenLimitModal?: VoidFunction;
 }
 
 export const PostItem: React.FC<Props> = (props) => {
-   const { data, onSaveEmail, isPromptAccess, isAuthenticated } = props;
+   const { data, isPromptAccess, isAuthenticated, onCopiedPrompt, isAvailableCopy, onOpenLimitModal } = props;
    const [showAllTags, setShowAllTags] = React.useState(false);
-
-   const contentType = React.useMemo(() => {
-      return data.preview.mimeType.split("/")[0] as "image" | "video";
-   }, [data.preview]);
+   const router = useRouter();
 
    const isLockedPrompt = React.useMemo(() => {
       if ((data.plan === "premium" && !isPromptAccess) || data.plan === "coming-soon") {
@@ -39,6 +37,14 @@ export const PostItem: React.FC<Props> = (props) => {
       return false;
    }, [isPromptAccess, data]);
 
+   const handleCopyDisabled = () => {
+      if (!isAuthenticated) {
+         router.push("/signup");
+      } else {
+         onOpenLimitModal?.();
+      }
+   };
+
    return (
       <article className={clsx(css.thumbnail, css.thumbnail_grid)}>
          <div className={css.thumbnail_image}>
@@ -47,14 +53,11 @@ export const PostItem: React.FC<Props> = (props) => {
             <div className={css.thumbnail_controls}>
                {!isLockedPrompt && (
                   <CopyPrompt
-                     prompt={data.prompt}
-                     onSave={
-                        data.plan === "coming-soon" ? onSaveEmail?.bind(null, data.id) : undefined
-                     }
-                     onClick={() => data.file && downloadFile(fileToServerPath(data.file).main)}
-                  >
-                     Copy Prompt
-                  </CopyPrompt>
+                     postId={data.id}
+                     onCopied={onCopiedPrompt}
+                     active={isAvailableCopy}
+                     onCopyDisabled={handleCopyDisabled}
+                  />
                )}
                {data.plan === "premium" && (
                   <PremiumButton href={isLockedPrompt ? "/pricing" : undefined} />

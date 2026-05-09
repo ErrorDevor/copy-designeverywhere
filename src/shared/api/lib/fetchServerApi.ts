@@ -1,3 +1,6 @@
+import qs from "qs";
+
+import { getGuestContext } from "features/Auth/lib/getGuestContext";
 import { getServerAccessToken } from "features/Auth/lib/getServerAccessToken";
 
 import { config } from "../config";
@@ -11,6 +14,8 @@ export interface FetchApiOptions {
    query?: Record<any, any>;
    params?: Record<string, any>;
    tags?: string[];
+   includeGuestHeaders?: boolean;
+   method?: string;
 }
 
 export async function fetchServerApi<T = unknown>(url: string, options: FetchApiOptions = {}) {
@@ -32,14 +37,22 @@ export async function fetchServerApi<T = unknown>(url: string, options: FetchApi
 
    const accessToken = await getServerAccessToken();
 
+   const ctx = await getGuestContext();
+
    // Fetch data
    const response = await fetch(endpoint, {
       cache: options.noCache ? "no-store" : undefined,
-      headers: accessToken
-         ? {
-              Authorization: `Bearer ${accessToken}`,
-           }
-         : undefined,
+      method: options.method ?? "get",
+      headers: {
+         ...(accessToken ? { Authorization: `Bearer ${accessToken}` } : {}),
+         ...(options.includeGuestHeaders
+            ? {
+                 "User-Agent": ctx.userAgent,
+                 "x-guest-id": ctx.guestId,
+                 "x-forwarded-for": ctx.ip,
+              }
+            : {}),
+      },
       next: !options.noCache
          ? {
               revalidate: config.revalidateMs,

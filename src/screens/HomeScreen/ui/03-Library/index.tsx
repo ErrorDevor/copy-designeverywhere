@@ -7,10 +7,10 @@ import { useSearchParams } from "next/navigation";
 import clsx from "clsx";
 import qs from "qs";
 
-import { useAuth } from "features/Auth";
+import { useAuth, usePromptsLeft } from "features/Auth";
 import { isSubscribedAccess } from "features/Auth/lib/access";
 import { Filter } from "features/Filter";
-import { PostItem, PostLeaveEmail } from "features/Post";
+import { PostItem, PostLeaveEmail, PromptLimitModal } from "features/Post";
 import { usePosts } from "features/Post/model/usePosts";
 
 import css from "./Library.module.scss";
@@ -21,6 +21,8 @@ interface Prop {
 
 export const Library: React.FC<Prop> = ({ clasName }) => {
    const { data: authData } = useAuth();
+
+   const promptLeft = usePromptsLeft();
 
    const libRef = React.useRef<HTMLDivElement>(null);
    const [saveEmail, setSaveEmail] = React.useState({
@@ -34,6 +36,8 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
       aiTools: searchParams.get("aiTools")?.split(",") || [],
       tags: searchParams.get("tags")?.split(",") || [],
    });
+
+   const [limitModalActive, setLimitModalActive] = React.useState(false);
 
    const handleSaveEmail = (postId: string) => {
       setSaveEmail({ active: true, postId });
@@ -50,7 +54,7 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
       if (libRef.current) {
          libRef.current.scrollIntoView({
             block: "start",
-            behavior: "smooth",
+            behavior: "auto",
          });
       }
    };
@@ -110,6 +114,9 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
                      onSaveEmail={handleSaveEmail}
                      isPromptAccess={isSubscribedAccess(authData?.plan)}
                      isAuthenticated={!!authData}
+                     onCopiedPrompt={() => promptLeft.refetch()}
+                     isAvailableCopy={promptLeft.promptsWaitCount !== 0}
+                     onOpenLimitModal={() => setLimitModalActive(true)}
                      key={post.id}
                   />
                ))}
@@ -164,6 +171,7 @@ export const Library: React.FC<Prop> = ({ clasName }) => {
             onClose={() => setSaveEmail({ ...saveEmail, active: false })}
             postId={saveEmail.postId || ""}
          />
+         <PromptLimitModal active={limitModalActive} onClose={() => setLimitModalActive(false)} />
       </section>
    );
 };

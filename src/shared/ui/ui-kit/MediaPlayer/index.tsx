@@ -43,6 +43,21 @@ export function MediaPlayer(props: Props) {
       contentType === "video" ? fileToServerPath(data).main : undefined
    );
 
+   const handleEnter = () => {
+      if (window.innerWidth > 1024 || contentType !== "video") {
+         return;
+      }
+      setPlay(true);
+   };
+
+   const handleLeave = () => {
+      if (window.innerWidth > 1024 || contentType !== "video") {
+         return;
+      }
+      setPlay(false);
+      setStarted(false);
+   };
+
    React.useEffect(() => {
       const el = rootRef.current;
       if (!el) return;
@@ -75,11 +90,8 @@ export function MediaPlayer(props: Props) {
    return (
       <div
          className={clsx(css.media, className)}
-         onMouseEnter={() => setPlay(true)}
-         onMouseLeave={() => {
-            setPlay(false);
-            setStarted(false);
-         }}
+         onMouseEnter={handleEnter}
+         onMouseLeave={handleLeave}
          ref={rootRef}
       >
          <div className={css.media_aspect} style={{ paddingBottom }}>

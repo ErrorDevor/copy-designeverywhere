@@ -3,9 +3,9 @@ import "shared/styles/index.scss";
 
 import { Metadata } from "next";
 import localFont from "next/font/local";
-import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { ReactQueryProvider } from "./providers/ReactQueryProvider";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 import { AuthProvider } from "features/Auth/providers/AuthProvider";
 import { FetchSubscriptionPlan } from "features/Pricing";
@@ -40,21 +40,18 @@ export const metadata: Metadata = {
    },
 };
 
-export default function RootLayout({
+export default async function RootLayout({
    children,
 }: Readonly<{
    children: React.ReactNode;
 }>) {
-   console.log(process.env.NODE_ENV)
    return (
       <html lang="en" className={`${abcdiatype.variable} ${monumentMono.variable}`}>
-         {process.env.NODE_ENV === 'production' && (
-            <GoogleAnalytics gaId="G-LF80ZYNHJL" />
-         )}
+         {process.env.NODE_ENV === "production" && <GoogleAnalytics gaId="G-LF80ZYNHJL" />}
          <body>
             <ReactQueryProvider>
                <AuthProvider>
-                  {children} 
+                  {children}
                   <FetchSubscriptionPlan />
                </AuthProvider>
             </ReactQueryProvider>

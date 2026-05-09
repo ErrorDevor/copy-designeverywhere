@@ -48,6 +48,13 @@
    }
 }
 
+.promptsLeft {
+   padding-top: 0.15em;
+   @include fontABCDiatype(1.3rem, 1.1, -0.02rem, 400, rgba(13, 13, 13, 0.75));
+
+   transition: opacity 200ms ease;
+}
+
 .circle {
    border: 0.05rem solid #0d0d0d;
    border-radius: 1rem;
@@ -81,6 +88,7 @@
 @media (max-width: 580px) {
    .header {
       padding: 0 5.1282051282vw;
+      justify-content: space-between;
    }
 
    .header_inner,
@@ -89,11 +97,17 @@
    }
 
    .header_left {
-      width: 100%;
+      // width: 100%;
    }
 
    .search_button {
       margin-left: auto;
+   }
+
+   .header_logo {
+      position: relative;
+      inset: 0;
+      transform: none;
    }
 
    .burger_button {

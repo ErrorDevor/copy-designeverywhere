@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 
 import { authApi } from "features/Auth/api/authApi";
+import { getGuestContext } from "features/Auth/lib/getGuestContext";
 
 const APP_VERSION = "1.0.0";
 
@@ -9,6 +10,15 @@ const authRoutes = ["/login", "signup"];
 export async function middleware(req: NextRequest) {
    const response = NextResponse.next();
    const pathname = req.nextUrl.pathname;
+
+   const ctx = await getGuestContext();
+
+   if (!ctx.guestId) {
+      const guestId = crypto.randomUUID();
+      response.cookies.set("guest_id", guestId, {
+         maxAge: 60 * 60 * 24 * 365,
+      });
+   }
 
    // Получаем токены
    const accessToken = req.cookies.get("accessToken")?.value;
@@ -34,9 +44,9 @@ export async function middleware(req: NextRequest) {
                },
             },
          });
-          if(!r?.user) {
-           throw new Error('User not found');
-          }
+         if (!r?.user) {
+            throw new Error("User not found");
+         }
          const redirectRes = NextResponse.redirect(new URL("/", req.url));
 
          response.cookies.getAll().forEach((cookie) => {
@@ -45,7 +55,7 @@ export async function middleware(req: NextRequest) {
 
          return redirectRes;
       } catch (error) {
-          response.cookies.delete("accessToken");
+         response.cookies.delete("accessToken");
       }
    }
 
