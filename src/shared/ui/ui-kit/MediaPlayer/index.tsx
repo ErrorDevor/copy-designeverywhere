@@ -44,14 +44,14 @@ export function MediaPlayer(props: Props) {
    );
 
    const handleEnter = () => {
-      if (window.innerWidth > 1024 || contentType !== "video") {
+      if (window.innerWidth < 1024 || contentType !== "video") {
          return;
       }
       setPlay(true);
    };
 
    const handleLeave = () => {
-      if (window.innerWidth > 1024 || contentType !== "video") {
+      if (window.innerWidth < 1024 || contentType !== "video") {
          return;
       }
       setPlay(false);
@@ -126,7 +126,7 @@ export function MediaPlayer(props: Props) {
                         />
                      </>
                   )}
-                  {play && !videoLoader.loaded && (
+                  {contentType === "video" && !started && play && (
                      <div className={css.media_loader_container}>
                         <LoaderIcon className={css.media_loader} />
                      </div>
