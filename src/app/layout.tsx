@@ -43,13 +43,13 @@ export const metadata: Metadata = {
       title: "Lafys - Premium Website Prompts",
       description:
          "Create beautiful landing pages in minutes with our ready-to-use prompt library. Copy, paste, and launch instantly.",
-      images: ["/lafys-description.jpg"],
+      images: ["https://lafys.com/lafys-description.jpg"],
    },
    twitter: {
       title: "Lafys - Premium Website Prompts",
       description:
          "Create beautiful landing pages in minutes with our ready-to-use prompt library. Copy, paste, and launch instantly.",
-      images: ["/lafys-description.jpg"],
+      images: ["https://lafys.com/lafys-description.jpg"],
    },
 };
 
