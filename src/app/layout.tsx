@@ -33,10 +33,23 @@ const monumentMono = localFont({
 
 export const metadata: Metadata = {
    title: "Lafys - Premium Website Prompts",
-   description: "Lafys - Premium Website Prompts",
+   description:
+      "Create beautiful landing pages in minutes with our ready-to-use prompt library. Copy, paste, and launch instantly.",
    icons: {
       icon: "/favicon.svg",
       apple: "/favicon.svg",
+   },
+   openGraph: {
+      title: "Lafys - Premium Website Prompts",
+      description:
+         "Create beautiful landing pages in minutes with our ready-to-use prompt library. Copy, paste, and launch instantly.",
+      images: ["/lafys-description.jpg"],
+   },
+   twitter: {
+      title: "Lafys - Premium Website Prompts",
+      description:
+         "Create beautiful landing pages in minutes with our ready-to-use prompt library. Copy, paste, and launch instantly.",
+      images: ["/lafys-description.jpg"],
    },
 };
 
