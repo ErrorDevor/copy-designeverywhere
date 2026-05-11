@@ -24,7 +24,7 @@ export const Header: React.FC = () => {
             </Button>
             <Button variant="light" className={css.menu_button} href="/backgrounds" as="a">
                <span>→&nbsp;</span>
-               Backgrounds
+               Snippets
             </Button>
          </nav>
 
