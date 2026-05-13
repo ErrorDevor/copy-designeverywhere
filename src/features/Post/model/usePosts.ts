@@ -38,7 +38,7 @@ export const usePosts = (filter: Partial<PostsFilter> = {}) => {
    const query = useQuery<PostList>({
       queryKey: [GET_POSTS_KEY, qs.stringify(queryFilter)],
       queryFn: () =>
-         fetchClientApi("/posts", {
+         fetchClientApi("/posts/list", {
             query: queryFilter,
          }),
    });

@@ -20,7 +20,7 @@ export default async function Home({ searchParams }: PageWithSearchParams) {
       tags: tags?.toString().split(",") || [],
    });
 
-   const posts = await fetchServerApi("/posts", {
+   const posts = await fetchServerApi("/posts/list", {
       noCache: true,
       query: queryPosts,
    });
